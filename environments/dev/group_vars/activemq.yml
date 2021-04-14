@@ -1,0 +1,100 @@
+# ----------------------------------------------------------------------------
+#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+# ----------------------------------------------------------------------------
+
+amq_group: wso2
+amq_user: wso2carbon
+amq_gid: 802
+amq_product_name: apache-activemq
+amq_product_version: 5.16.1
+amq_base_dir: /mnt
+target: /mnt
+product_package_location: files
+jdbc_driver: mysql-connector-java-5.1.48-bin.jar
+amq_version: 5.14.5
+amq_skip_download: True
+ansible_service_mgr: systemd
+
+jdk_name: amazon-corretto-8.242.08.1-linux-x64
+java_dir: /opt
+java_symlink: "{{ java_dir }}/java"
+java_home: "{{ java_dir }}/{{ jdk_name }}"
+
+
+amq_additional_files:
+  # Test DB
+  # - source:      mysql-connector-java-5.1.44-bin.jar
+  #   destination: /lib
+  - source:      sqljdbc42.jar
+    destination: /lib
+  # - source:      "keystores/{{ ansible_hostname }}/broker.ks"
+  #   destination: /conf/broker.ts
+
+amq_datasource:
+  #id: mssql-ds
+  id: mysql-ds
+  class: org.apache.commons.dbcp2.BasicDataSource
+  properties:
+    #driverClassName: com.mysql.jdbc.Driver
+    #url: "jdbc:mysql://{{ vault_amq_hostname }}:3306/{{ vault_amq_database }}?autoReconnect=true"
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: "jdbc:sqlserver://{{ vault_amq_hostname }}:1433;databaseName={{ vault_amq_database }};applicationIntent=ReadWrite"
+    username: "{{ vault_amq_username }}"
+    password: "{{ vault_amq_password }}"
+
+amq_jdbc_persistence_adapter: "#{{ amq_datasource.id }}"
+amq_jdbc_adapter_type: imageBasedJDBCAdaptor
+
+amq_keystore_name:     broker.ks
+amq_keystore_password: "{{ vault_amq_keystore_password }}"
+
+amq_web_users: "{{ vault_amq_web_users }}"
+
+# List of configuration file templates, and the paths they should be written to
+config_files:
+  - { src: 'activemq.j2',
+      dest: '{{ activemq_home }}/bin/activemq' }
+  - { src: 'activemq.xml.j2',
+      dest: '{{ activemq_home }}/conf/activemq.xml' }
+
+# Add any new changes you want to add for the group/profile below.
+# If you add a new file under templates and parameterized the file, the values for those parameters should be added
+# below.
+# Example:
+# Changes applied to example.xml file.
+# example_driver_class_name: com.mysql.jdbc.Driver
+# example_url: jdbc:mysql://wso2is-pattern1-mysql-service:3306/WSO2_IDENTITY_DB autoReconnect=true&amp;verifyServerCertificate=false&amp;useSSL=true
+# example_username: wso2carbon
+# example_password: wso2carbon
+
+# Configure proxy ports. Note that this is a optional attribute.
+# catalina_server_connector_http_proxy_port: 80
+catalina_server_connector_http_max_threads: 250
+catalina_server_connector_http_accept_count: 200
+# catalina_server_connector_https_proxy_port: 443
+catalina_server_connector_https_max_threads: 250
+catalina_server_connector_https_accept_count: 200
+
+vault_amq_database: ActiveMQPersistentStore
+vault_amq_username: wso2mquser
+vault_amq_password: DNn3aJGPTYY4vSiNVK6X
+vault_amq_hostname: 10.0.1.64
+
+vault_amq_keystore_password: password
+
+vault_amq_web_users:
+  - username: admin
+    password: topsecret
+    rolename: admin

@@ -1,0 +1,45 @@
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+activemq {
+    org.apache.activemq.jaas.PropertiesLoginModule required
+        org.apache.activemq.jaas.properties.user="users.properties"
+        org.apache.activemq.jaas.properties.group="groups.properties";
+};
+
+{% if amq_ldap_enabled is defined and amq_ldap_enabled == True %}
+jetty {
+    org.eclipse.jetty.jaas.spi.LdapLoginModule required
+    debug="true"
+    contextFactory="com.sun.jndi.ldap.LdapCtxFactory"
+    hostname="{{ amq_ldap_hostname }}"
+    port="{{ amq_ldap_port }}"
+    providerUrl="{{ amq_ldap_url }}"
+    bindDn="{{ amq_ldap_bind_dn }}"
+    bindPassword="{{ amq_ldap_bind_password }}"
+    authenticationMethod="simple"
+    forceBindingLogin="true"
+    userBaseDn="{{ amq_ldap_user_base_dn }}"
+    userRdnAttribute="{{ amq_ldap_user_rdn_attrib }}"
+    userIdAttribute="{{ amq_ldap_user_id_attrib }}"
+    userPasswordAttribute="{{ amq_ldap_user_password_attrib }}"
+    userObjectClass="{{ amq_ldap_user_object_class }}"
+    roleBaseDn="{{ amq_ldap_role_base_dn }}"
+    roleNameAttribute="{{ amq_ldap_role_name_attrib }}"
+    roleMemberAttribute="{{ amq_ldap_role_member_attrib }}"
+    roleObjectClass="{{ amq_ldap_role_object_class }}";
+};
+{% endif %}

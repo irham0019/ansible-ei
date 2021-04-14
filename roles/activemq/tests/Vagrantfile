@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+# The yenlo/centos7-openjdk8 box can be found/created here https://bitbucket.org/yenlo/yenlo_vagrantbox-centos7-openjdk8
+  boxes = [
+    { :name => "centos-minimal-box", :box => "yenlo/centos7-openjdk8" }
+  ]
+  boxes.each do |opts|
+    config.vm.define opts[:name] do |config|
+      config.vm.box = opts[:box]
+      if opts[:name] == boxes.last[:name]
+        # Make sure we can access the box from the host...
+        config.vm.network "private_network", type: "dhcp"
+
+        config.vm.provision "ansible" do |ansible|
+          ansible.playbook = "test.yml"
+          ansible.limit = "all"
+        end
+      end
+    end
+  end
+end

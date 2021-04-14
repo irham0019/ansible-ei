@@ -1,0 +1,36 @@
+#- name: Download Hawtio
+#  get_url:
+#    url: "{{ amq_hawtio_download_url }}"
+#    dest: "{{ amq_download_path }}/hawtio-default-{{ amq_hawtio_version }}.war"
+#  when: amq_skip_download == False
+#
+#- name: Create the Hawtio webapps folder
+#  file:
+#    path: "{{ amq_base_dir }}/activemq/webapps/hawtio"
+#    state: directory
+#    owner:   "{{ amq_user }}"
+#    group:   "{{ amq_group }}"
+#  when: amq_hawtio_replace_default_console == False
+#
+#- block:
+#  - name: Remove existing admin console folder
+#    file:
+#      state: absent
+#      path: "{{ amq_base_dir }}/activemq/webapps/admin"
+#
+#  - name: Recreate admin console folder
+#    file:
+#      state: directory
+#      path: "{{ amq_base_dir }}/activemq/webapps/admin"
+#  when: amq_hawtio_replace_default_console|bool
+#
+#- name: Extract Hawtio WAR
+#  unarchive:
+#    remote_src: "{{ 'no' if amq_skip_download else 'yes' }}"
+#    src:     "{{ amq_files_path if amq_skip_download else amq_download_path }}/hawtio-default-{{ amq_hawtio_version }}.war"
+#    dest:    "{{ amq_base_dir }}/activemq/webapps/{{ 'admin' if amq_hawtio_replace_default_console else 'hawtio' }}"
+#    creates: "{{ amq_base_dir }}/activemq/webapps/{{ 'admin' if amq_hawtio_replace_default_console else 'hawtio' }}/WEB-INF"
+#    owner:   "{{ amq_user }}"
+#    group:   "{{ amq_group }}"
+#  notify:
+#    - restart activemq

@@ -1,0 +1,83 @@
+---
+- block:
+    # Set installation directory information
+    - name: Installation Information
+      set_fact:
+        product_dir: "{{ target }}/is"
+        carbon_home: "{{ target }}/is/{{ product_name }}-{{ product_version }}"
+
+
+    - name: Unzip migration script
+      unarchive:
+        src: "{{ product_package_location }}/migration-scripts/migration-resources.zip"
+        dest: "{{ product_dir }}/{{ product_name }}-{{ product_version }}/"
+        mode: u=rw,g=r,o=r
+
+    - name: Copy migration jar
+      copy:
+        src: "{{ product_package_location }}/migration-scripts/org.wso2.carbon.is.migration-1.0.101.jar"
+        dest: "{{ carbon_home }}/repository/components/dropins"
+
+    - name: Change the owner of WSO2 directory
+      file:
+        path: "{{ target }}"
+        state: directory
+        recurse: true
+        owner: "{{ wso2_user }}"
+        group: "{{ wso2_group }}"
+        mode: 0755
+
+    - name: Change the owner of WSO2 directory
+      file:
+        path: "{{ target }}"
+        state: directory
+        recurse: true
+        owner: "{{ wso2_user }}"
+        group: "{{ wso2_group }}"
+        mode: 0755
+
+    - name: Run sh /mnt/is/wso2is-5.9.0/bin/wso2server.sh start -Dmigrate -Dcomponent=identity to migrate the server
+      command: sh /mnt/is/wso2is-5.9.0/bin/wso2server.sh start -Dmigrate -Dcomponent=identity
+      become: yes
+      become_user: "{{ wso2_user }}"
+
+    - name: Waits for port 9443 of any local IP , don't start checking for 90 seconds
+      wait_for:
+        host: 0.0.0.0
+        port: 9443
+        delay: 90
+        state: drained
+
+    - name: sleep for 300 seconds and continue with play
+      wait_for:
+        timeout: 90
+
+    - name: Run sh /mnt/is/wso2is-5.9.0/bin/wso2server.sh stop to stop the server
+      command: sh /mnt/is/wso2is-5.9.0/bin/wso2server.sh stop
+      become: yes
+      become_user: "{{ wso2_user }}"
+
+    - name: sleep for 300 seconds and continue with play
+      wait_for:
+        timeout: 90
+
+#    - name: Stop wso2-is migration as a service
+#      systemd:
+#        name: wso2is
+#        state: stopped
+
+  when: inventory_hostname == run_migration_node
+  become: true
+  become_method: sudo
+  become_user: root
+
+
+#- block:
+#    - name: Start wso2-is migration as a service
+#      systemd:
+#        name: wso2ismigration
+#        state: started
+#        daemon_reload: yes
+#  become: true
+#  become_user: root
+#  when: inventory_hostname == run_migration_node

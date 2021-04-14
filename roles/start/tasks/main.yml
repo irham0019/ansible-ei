@@ -1,0 +1,55 @@
+#----------------------------------------------------------------------------
+#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#----------------------------------------------------------------------------
+---
+  - block:
+    # Set installation directory information
+      - name: Installation Information
+        set_fact:
+          product_dir: "{{ target }}/is"
+          carbon_home: "{{ target }}/is/{{ product_name }}-{{ product_version }}"
+
+      - name: Stop wso2is as a service
+        systemd:
+          name: wso2is
+          state: stopped
+        ignore_errors: yes
+
+      - name: sleep for 30 seconds and continue with play
+        wait_for:
+          timeout: 30
+
+#      - name: Copy WSO2IS service file
+#        template:
+#          src: "wso2is.service.j2"
+#          dest: /etc/systemd/system/wso2is.service
+#
+#      - name: Start wso2-is as a service
+#        systemd:
+#          name: wso2is
+#          state: started
+#          daemon_reload: yes
+#
+#      - name: Waits for port 9443 of any local IP , don't start checking for 90 seconds
+#        wait_for:
+#          host: 0.0.0.0
+#          port: 9443
+#          delay: 90
+#          state: drained
+
+    become: true
+    become_user: root
+    when: "(inventory_hostname in groups['is'])"
+    become_method: sudo

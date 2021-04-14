@@ -1,0 +1,162 @@
+---
+# tasks file for activemq
+- block:
+    # Set installation directory information
+    - name: Installation Information
+      set_fact:
+        product_dir: "{{ target }}/amq"
+        activemq_home: "{{ target }}/amq/{{ amq_product_name }}-{{ amq_product_version }}"
+
+#- name: Create ActiveMQ group
+#  user:
+#    name: "{{ amq_group }}"
+#    uid:  "{{ amq_gid | default(omit) }}"
+#  when: amq_create_group == True
+#
+#- name: Create ActiveMQ user
+#  user:
+#    name:  "{{ amq_user }}"
+#    group: "{{ amq_group }}"
+#    uid:   "{{ amq_uid | default(omit) }}"
+#  when: amq_create_user == True
+
+- name: Create ActiveMQ group
+  group: name="{{ amq_group }}" state=present gid=802
+
+- name: Add ActiveMQ user
+  user: name="{{ amq_user }}" shell=/bin/bash group="{{ amq_group }}" state=present uid=802
+
+#- name: Create base directory
+#  file:
+#    path:  "{{ amq_base_dir }}"
+#    owner: "{{ amq_user }}"
+#    group: "{{ amq_group }}"
+#    mode:  0750
+#    state: directory
+
+- name: Create product directory
+  file:
+    path: "{{ activemq_home }}"
+    state: directory
+    mode: 0755
+  when: "(inventory_hostname in groups['activemq'])"
+  become: true
+  become_method: sudo
+  become_user: root
+
+- name: Unzip ActiveMQ package
+  unarchive:
+    src: "{{ product_package_location }}/packs/{{ amq_product_name }}-{{ amq_product_version }}-bin.tar.gz"
+    dest: "{{ activemq_home }}"
+    mode: u=rw,g=r,o=r
+  when: amq_skip_download == False
+  become: true
+  become_method: sudo
+  become_user: root
+
+- name: Copy configuration templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop: "{{ config_files }}"
+  become: true
+  become_method: sudo
+  become_user: root
+#- name: Download ActiveMQ
+#  get_url:
+#    url: "{{ amq_download_url }}"
+#    dest: "{{ amq_download_path }}/apache-activemq-{{ amq_version }}-bin.{{ amq_distribution_type }}"
+#  when: amq_skip_download == False
+#
+#- name: Extract ActiveMQ
+#  unarchive:
+#    remote_src: "{{ 'no' if amq_skip_download else 'yes' }}"
+#    src:     "{{ amq_files_path if amq_skip_download else amq_download_path }}/apache-activemq-{{ amq_version }}-bin.{{ amq_distribution_type }}"
+#    dest:    "{{ amq_base_dir }}"
+#    creates: "{{ amq_base_dir }}/apache-activemq-{{ amq_version }}"
+#    owner:   "{{ amq_user }}"
+#    group:   "{{ amq_group }}"
+#
+- name: Create symlink for ActiveMQ directory
+  file:
+    src:   "{{ activemq_home }}"
+    dest:  "{{ product_dir }}/activemq"
+    owner: "{{ amq_user }}"
+    group: "{{ amq_group }}"
+    state: link
+  become: true
+  become_method: sudo
+  become_user: root
+#
+#- name: Copy additional files into place
+#  copy:
+#    src: "{{ amq_files_dir }}/{{ item.source }}"
+#    dest: "{{ amq_base_dir }}/activemq/{{ item.destination }}"
+#    owner: "{{ amq_user }}"
+#    group: "{{ amq_group }}"
+#  with_items: "{{ amq_additional_files }}"
+#
+- name: Fix permissions for ActiveMQ startup script
+  file:
+    path: "{{ product_dir }}/activemq/bin/activemq"
+    mode: 0755
+  become: true
+  become_method: sudo
+  become_user: root
+
+#- name: Create symlink for startup script
+#  file:
+#    src:   "{{ product_dir }}/activemq/bin/activemq"
+#    dest:  "/etc/init.d/activemq"
+#    owner: "root"
+#    group: "root"
+#    state: link
+#  when: ansible_service_mgr != "systemd"
+
+- name: Create systemd service for ActiveMQ
+  template:
+    src:  activemq.service.j2
+    dest: "/lib/systemd/system/activemq.service"
+  when: ansible_service_mgr == "systemd"
+  become: true
+  become_method: sudo
+  become_user: root
+#
+#- name: Configure ActiveMQ
+#  template:
+#    src:   "{{ item }}"
+#    dest:  "{{ amq_base_dir }}/activemq/conf/{{ item | regex_replace('\\.j2$','') }}"
+#    owner: "{{ amq_user }}"
+#    group: "{{ amq_group }}"
+#    mode:  0640
+#  with_items:
+#  - activemq.xml.j2
+#  - jetty-realm.properties.j2
+#  - jetty.xml.j2
+#  - login.config.j2
+#  notify: "restart activemq"
+#  tags:
+#  - config
+#
+#- name: Create ActiveMQ defaults file for service
+#  template:
+#    src:   "activemq.j2"
+#    dest:  "/etc/default/activemq"
+#    owner: "root"
+#    group: "root"
+#    mode:  0644
+#
+- name: Enable service
+  service:
+    name:    "activemq"
+    state:   started
+    enabled: yes
+  register: amq_service
+
+#- name: include optional
+#  include_tasks: hawtio.yml
+#  when: amq_hawtio_enabled|bool
+
+  become: true
+  become_method: sudo
+  become_user: root

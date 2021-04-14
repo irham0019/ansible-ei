@@ -1,0 +1,46 @@
+---
+## defaults file for activemq
+#amq_broker_name:         '{{ ansible_hostname }}'
+#amq_user:                'amq'
+#amq_group:               '{{ amq_user }}'
+#amq_base_dir:            '/opt/apache'
+#amq_files_dir:           '{{ playbook_dir }}/files'
+#amq_version:             '5.15.9'
+#amq_distribution_type:   'zip'
+#amq_files_path:         'files'
+#amq_download_path:       '/tmp'
+#amq_download_url:	 'http://mirror.novg.net/apache/activemq/{{ amq_version }}/apache-activemq-{{ amq_version }}-bin.{{ amq_distribution_type }}'
+#amq_create_user:         True
+#amq_create_group:        True
+#amq_skip_download:       False
+#amq_install_unzip:       True
+#amq_java_home:           '/usr/lib/jvm/java'
+#amq_ldap_enabled:        False
+#
+#amq_os_packages:
+#  - unzip
+#  - java-1.8.0-openjdk-headless
+#
+#### Hawtio ###  (=richer admin console)
+#amq_hawtio_enabled:                   True
+#
+## IF you want to disable the default and replace it with Hawtio then make sure the next becomes True
+#amq_hawtio_replace_default_console:   False
+#amq_hawtio_version:                   '2.7.0'
+#amq_hawtio_download_url:              'https://oss.sonatype.org/content/repositories/public/io/hawt/hawtio-default/{{ amq_hawtio_version }}/hawtio-default-{{ amq_hawtio_version }}.war'
+#
+#amq_keystore_name:       broker.ks
+#amq_keystore_password:   password
+#
+#amq_web_user_roles:      user,admin
+#amq_web_admin_roles:     admin
+#
+#amq_additional_files: []
+#
+#amq_web_users:
+#  - username: admin
+#    password: admin
+#    rolename: admin
+#  - username: user
+#    password: user
+#    rolename: user

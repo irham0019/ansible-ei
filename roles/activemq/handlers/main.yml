@@ -1,0 +1,7 @@
+---
+# handlers file for activemq
+ - name: restart activemq
+   service:
+     name:  "activemq"
+     state: restarted
+   when: amq_service.changed == False
