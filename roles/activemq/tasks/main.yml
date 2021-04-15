@@ -47,7 +47,7 @@
 
     - name: Remove existing setup
       file:
-        path: "{{ activemq_home }}"
+        path: "{{ product_dir }}"
         state: absent
 
     - name: Create product directory
