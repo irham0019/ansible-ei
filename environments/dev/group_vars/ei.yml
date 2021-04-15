@@ -43,8 +43,8 @@ old_security_file_list:
       dest: '{{ carbon_home }}/repository/resources/security/wso2carbon-old.jks' }
 
 # Set the location the product packages should reside in (eg: "local" in the /files directory, "remote" in a remote location)
-pack_location: false
-#pack_location: local
+#pack_location: false
+pack_location: local
 #pack_location: remote
 #remote_jdk: "<URL_TO_JDK_FILE>"
 

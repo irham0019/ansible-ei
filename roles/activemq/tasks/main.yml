@@ -186,7 +186,7 @@
 
     - name: Enable service
       service:
-        name:    "activemq"
+        name:  activemq
         state:   started
         enabled: yes
       register: amq_service
@@ -202,7 +202,7 @@
 - block:
     - name: Start activemq as a service
       systemd:
-        name: "{{ amq_user }}"
+        name: activemq
         state: started
         daemon_reload: yes
 
