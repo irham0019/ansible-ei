@@ -70,7 +70,6 @@
         src: "{{ product_package_location }}/packs/{{ product_name }}-{{ product_version }}.zip"
         dest: "{{ product_dir }}"
         mode: u=rw,g=r,o=r
-        show_progress_bar: True
       when: pack_location == "local"
 
     - name: Unzip WSO2 EI Package from remote source
@@ -79,14 +78,12 @@
         dest: "{{ product_dir }}"
         mode: u=rw,g=r,o=r
         remote_src: yes
-        show_progress_bar: True
       when: pack_location == "remote"
 
     - name: Copy JDBC Driver
       copy:
        src: "{{ product_package_location }}/lib/{{ jdbc_driver }}"
        dest: "{{ micro_integrator_home }}/lib"
-       show_progress_bar: True
 
     - name: Copy configuration templates
       template:
