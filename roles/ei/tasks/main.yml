@@ -21,6 +21,7 @@
         product_dir: "{{ target }}/ei"
         carbon_home: "{{ target }}/ei/{{ product_name }}-{{ product_version }}"
         micro_integrator_home: "{{ target }}/ei/{{ product_name }}-{{ product_version }}/micro-integrator"
+        micro_integrator_dashboard_home: "{{ target }}/ei/{{ product_name }}-{{ product_version }}/micro-integrator-dashboard"
         cluster: "{{ ei_cluster }}"
 
     - name: "Ansible | Print a variable"
@@ -36,8 +37,21 @@
 
     - name: Copy WSO2EI service file
       template:
-        src: "wso2ei.service.j2"
+        src: "micro_integrator_dashboard_home/wso2ei-dashboard.service.j2"
+        dest: /etc/systemd/system/wso2ei-dashboard.service
+      when: wso2ei_dashboard_enable == True
+
+    - name: Copy WSO2EI service file
+      template:
+        src: "micro_integrator_home/wso2ei.service.j2"
         dest: /etc/systemd/system/wso2ei.service
+
+    - name: Stop wso2ei dashboard as a service
+      systemd:
+        name: wso2ei-dashboard
+        state: stopped
+      ignore_errors: yes
+      when: wso2ei_dashboard_enable == True
 
     - name: Stop wso2ei as a service
       systemd:
@@ -49,12 +63,14 @@
       file:
         path: "{{ carbon_home }}"
         state: absent
+      when: pack_location == "local" or pack_location == "remote"
 
     - name: Unzip WSO2 EI Package from local source
       unarchive:
         src: "{{ product_package_location }}/packs/{{ product_name }}-{{ product_version }}.zip"
         dest: "{{ product_dir }}"
         mode: u=rw,g=r,o=r
+        show_progress_bar: True
       when: pack_location == "local"
 
     - name: Unzip WSO2 EI Package from remote source
@@ -63,12 +79,14 @@
         dest: "{{ product_dir }}"
         mode: u=rw,g=r,o=r
         remote_src: yes
+        show_progress_bar: True
       when: pack_location == "remote"
 
     - name: Copy JDBC Driver
       copy:
        src: "{{ product_package_location }}/lib/{{ jdbc_driver }}"
        dest: "{{ micro_integrator_home }}/lib"
+       show_progress_bar: True
 
     - name: Copy configuration templates
       template:
@@ -76,23 +94,13 @@
         dest: "{{ item.dest }}"
       loop: "{{ config_files }}"
 
-#    - name: Copy security file lis
-#      copy:
-#        src: "{{ item.src }}"
-#        dest: "{{ item.dest }}"
-#      loop: "{{ security_file_list }}"
-#      when: security_file_list is defined
-#
-#    - name: Old copy security file lis
-#      copy:
-#        src: "{{ item.src }}"
-#        dest: "{{ item.dest }}"
-#      loop: "{{ old_security_file_list }}"
-#      when: old_security_file_list is defined
-#
-## Enable customization by uncommenting the following and adding the changes to the custom.yml
-#    # - import_tasks: custom.yml
-#
+    - name: Copy dashboard configuration templates
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+      loop: "{{ dashboard_config_files }}"
+      when: wso2ei_dashboard_enable == True
+
     - name: Change the owner of WSO2 directory
       file:
         path: "{{ target }}"
@@ -113,6 +121,13 @@
         name: wso2ei
         state: started
         daemon_reload: yes
+
+    - name: Start wso2-ei dashboard as a service
+      systemd:
+        name: wso2ei-dashboard
+        state: started
+        daemon_reload: yes
+      when: wso2ei_dashboard_enable == True
 
     become: true
     become_user: root

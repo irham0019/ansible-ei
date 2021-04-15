@@ -18,7 +18,7 @@
 # NOTE: The parameterized values has the default values from the original pack. Please change them according to your
 # requirements. If you need to add additional configurations, please use the custom.yml under each role.
 
-hostname: wso2eidev01.stuller.laf
+hostname: 35.202.118.190
 port_offset: 0
 
-wso2ei_dashboard_enable: True
+wso2ei_dashboard_enable: False

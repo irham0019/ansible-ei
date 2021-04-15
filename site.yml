@@ -24,13 +24,10 @@
 
 #- name: Apply Identity Server configuration to is nodes
 #  hosts:
-##    - activemq_1
 #    - ei_1
-##    - ei_2
+#    - ei_2
 #  roles:
 #    - ei
-##    - ei-migration
-##    - start
 
 - name: Apply Identity Server configuration to is nodes
   hosts:

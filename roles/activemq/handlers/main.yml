@@ -4,4 +4,8 @@
    service:
      name:  "activemq"
      state: restarted
-   when: amq_service.changed == False
+#   when: amq_service.changed == False
+
+#  - name: reload systemd
+#    sudo: yes
+#    command: systemctl daemon-reload

@@ -1,4 +1,4 @@
-#----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 #  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +12,14 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-#----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
----
-# NOTE: The parameterized values has the default values from the original pack. Please change them according to your
-# requirements. If you need to add additional configurations, please use the custom.yml under each role.
+wso2_group: wso2
+wso2_user: wso2carbon
+product_name: wso2is
+product_version: 5.9.0
+target: /mnt
+product_package_location: files
+jdbc_driver: mysql-connector-java-5.1.48-bin.jar
 
-hostname: wso2eidev01.stuller.laf
-port_offset: 0
 
-wso2ei_dashboard_enable: True

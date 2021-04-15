@@ -1,16 +1,18 @@
 [Unit]
 Description=Apache ActiveMQ
-After=network-online.target
+After=network.target
 
 [Service]
-Type=forking
-WorkingDirectory={{ product_dir }}/activemq
-PIDFile={{ product_dir }}/activemq/data/activemq.pid
 ExecStart={{ product_dir }}/activemq/bin/activemq start
 ExecStop={{ product_dir }}/activemq/bin/activemq stop
-Restart=on-abort
-User={{ amq_user }}
-Group={{ amq_group }}
+ExecRestart={{ product_dir }}/activemq/bin/activemq restart
+User={{ wso2_user }}
+Group={{ wso2_group }}
+Type=forking
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=60s
+StartLimitBurst=3
 
 [Install]
 WantedBy=multi-user.target
