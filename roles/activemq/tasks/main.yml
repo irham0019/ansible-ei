@@ -45,6 +45,12 @@
         state: stopped
       ignore_errors: yes
 
+    - name: Remove existing setup
+      file:
+        path: "{{ activemq_home }}"
+        state: absent
+      when: pack_location == "local" or pack_location == "remote"
+
     - name: Create product directory
       file:
         path: "{{ activemq_home }}"
