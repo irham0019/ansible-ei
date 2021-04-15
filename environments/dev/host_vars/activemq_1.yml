@@ -20,6 +20,5 @@ product_name: wso2is
 product_version: 5.9.0
 target: /mnt
 product_package_location: files
-jdbc_driver: mysql-connector-java-5.1.48-bin.jar
 
-
+enable_performance_tuning: false

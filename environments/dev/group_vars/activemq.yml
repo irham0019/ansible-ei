@@ -22,7 +22,7 @@ amq_product_version: 5.16.1
 amq_base_dir: /mnt
 target: /mnt
 product_package_location: files
-jdbc_driver: mysql-connector-java-5.1.48-bin.jar
+jdbc_driver: mysql-connector-java-8.0.22.jar
 amq_version: 5.14.5
 amq_skip_download: True
 ansible_service_mgr: systemd
@@ -33,6 +33,8 @@ java_symlink: "{{ java_dir }}/java"
 java_home: "{{ java_dir }}/{{ jdk_name }}"
 
 amq_broker_name: wso2mqdev01.stuller.laf
+
+pack_location: false
 
 amq_additional_files:
   # Test DB

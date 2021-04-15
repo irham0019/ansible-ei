@@ -32,7 +32,7 @@ This repository contains the Ansible scripts for installing and configuring WSO2
 ├── files
 │   ├── lib
 │   │   ├── amazon-corretto-8.242.08.1-linux-x64.tar.gz
-│   │   └── mysql-connector-java-5.1.48-bin.jar
+│   │   └── mysql-connector-java-8.0.22.jar
 │   ├── migration-scripts
 │   │   ├── migration-resources.zip
 │   │   └── org.wso2.carbon.ei.migration-1.0.101.jar
