@@ -46,8 +46,9 @@
       register: output
       when: pack_location == "local"
 
-    - debug:
-      msg: "{{ output.rc }}"
+    - name: JDK debug
+      debug:
+        msg: "{{ output.rc }}"
 
     - name: Unarchive JDK distribution from remote source
       unarchive:
