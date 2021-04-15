@@ -49,7 +49,6 @@
       file:
         path: "{{ activemq_home }}"
         state: absent
-      when: pack_location == "local" or pack_location == "remote"
 
     - name: Create product directory
       file:
