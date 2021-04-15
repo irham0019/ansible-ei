@@ -21,6 +21,11 @@
     - name: Add wso2carbon user
       user: name="{{ wso2_user }}" shell=/bin/bash group=wso2 state=present uid=802
 
+    - name: Install unzip package
+      package:
+        name: unzip
+        state: present
+
     - name: System performance tuning
       copy:
         src: "{{ item.src }}"
@@ -53,11 +58,6 @@
         src: "{{ java_home }}"
         dest: "{{ java_symlink }}"
         state: link
-
-    - name: Install unzip package
-      package:
-        name: unzip
-        state: present
 
     become: true
     become_user: root
