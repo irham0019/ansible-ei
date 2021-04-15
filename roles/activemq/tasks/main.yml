@@ -60,9 +60,16 @@
     - name: Unzip ActiveMQ package
       unarchive:
         src: "{{ product_package_location }}/packs/{{ amq_product_name }}-{{ amq_product_version }}-bin.tar.gz"
-        dest: "{{ activemq_home }}"
+        dest: "{{ product_dir }}"
         mode: u=rw,g=r,o=r
       when: amq_skip_download == False
+
+#    - name: Unarchive ActiveMQ distribution from local source
+#      unarchive:
+#        src: "{{ product_package_location }}/lib/{{ jdk_name }}.tar.gz"
+#        dest: "{{ java_home }}"
+#        extra_opts: [--strip-components=1]
+#      when: pack_location == "local"
 
     - name: Copy configuration templates
       template:
@@ -167,6 +174,16 @@
     #    group: "root"
     #    mode:  0644
 
+
+    - name: Change the owner of WSO2 directory
+      file:
+        path: "{{ target }}"
+        state: directory
+        recurse: true
+        owner: "{{ wso2_user }}"
+        group: "{{ wso2_group }}"
+        mode: 0755
+
     - name: Enable service
       service:
         name:    "activemq"
@@ -185,7 +202,7 @@
 - block:
     - name: Start activemq as a service
       systemd:
-        name: activemq
+        name: "{{ amq_user }}"
         state: started
         daemon_reload: yes
 

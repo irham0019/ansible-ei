@@ -34,7 +34,7 @@ java_home: "{{ java_dir }}/{{ jdk_name }}"
 
 amq_broker_name: wso2mqdev01.stuller.laf
 
-pack_location: false
+pack_location: local
 
 amq_additional_files:
   # Test DB
