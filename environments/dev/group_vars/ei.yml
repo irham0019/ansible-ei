@@ -21,7 +21,7 @@ product_version: 7.1.0
 target: /mnt
 product_package_location: files
 jdbc_driver: mysql-connector-java-8.0.22.jar
-
+oracle_jdbc_driver: ojdbc7.jar
 run_migration_node: is_1
 
 # Performance tuning configurations
