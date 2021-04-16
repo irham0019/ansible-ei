@@ -21,9 +21,6 @@
     - name: Add wso2carbon user
       user: name="{{ wso2_user }}" shell=/bin/bash group=wso2 state=present uid=802
 
-    - name: upgrade all packages
-      yum: name=* state=latest
-
     - name: Install unzip package
       package:
         name: unzip
@@ -47,10 +44,6 @@
         dest: "{{ java_home }}"
       register: output
       when: pack_location == "local"
-
-    - name: JDK debug
-      debug:
-        msg: "{{ output.rc }}"
 
     - name: Unarchive JDK distribution from remote source
       unarchive:
