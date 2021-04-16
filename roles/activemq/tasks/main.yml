@@ -184,12 +184,12 @@
         group: "{{ wso2_group }}"
         mode: 0755
 
-    - name: Enable service
-      service:
-        name:  activemq
-        state:   started
-        enabled: yes
-      register: amq_service
+#    - name: Enable service
+#      service:
+#        name:  activemq
+#        state:   started
+#        enabled: yes
+#      register: amq_service
 
     #- name: include optional
     #  include_tasks: hawtio.yml
