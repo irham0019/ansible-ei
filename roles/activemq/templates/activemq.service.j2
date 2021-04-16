@@ -3,6 +3,9 @@ Description=Apache ActiveMQ
 After=network.target
 
 [Service]
+Type=forking
+WorkingDirectory={{ product_dir }}/activemq
+PIDFile={{ product_dir }}/activemq/data/activemq.pid
 ExecStart={{ product_dir }}/activemq/bin/activemq start
 ExecStop={{ product_dir }}/activemq/bin/activemq stop
 ExecRestart={{ product_dir }}/activemq/bin/activemq restart
