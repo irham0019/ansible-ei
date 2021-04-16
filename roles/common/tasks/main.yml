@@ -38,11 +38,18 @@
         path: "{{ java_home }}"
         state: directory
 
-    - name: Unarchive JDK distribution from local source
+#    - name: Unarchive JDK distribution from local source
+#      unarchive:
+#        src: "{{ product_package_location }}/lib/{{ jdk_name }}.tar.gz"
+#        dest: "{{ java_home }}"
+#      register: output
+#      when: pack_location == "local"
+
+    - name: Unzip JDK Package from local source
       unarchive:
         src: "{{ product_package_location }}/lib/{{ jdk_name }}.tar.gz"
         dest: "{{ java_home }}"
-      register: output
+        mode: u=rw,g=r,o=r
       when: pack_location == "local"
 
     - name: Unarchive JDK distribution from remote source
