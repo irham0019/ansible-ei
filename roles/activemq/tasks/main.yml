@@ -199,12 +199,14 @@
   become_method: sudo
   become_user: root
 
-- block:
-    - name: Start activemq as a service
-      systemd:
-        name: activemq
-        state: started
-        daemon_reload: yes
+#- block:
+#    - name: Start activemq as a service
+#      systemd:
+#        name: activemq
+#        state: started
+#        daemon_reload: yes
+#
+#  become: true
+#  become_user: root
 
-  become: true
-  become_user: root
+- service: name=activemq enabled=yes state=started
