@@ -21,7 +21,7 @@
     #  when: amq_create_user == True
 
     - name: Create ActiveMQ group
-      group: name="{{ amq_group }}" state=present gid=802
+      group: name="{{ amq_group }}" state=present gid=803
       ignore_errors: True
 
     - name: Add ActiveMQ user
