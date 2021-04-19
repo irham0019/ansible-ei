@@ -9,7 +9,7 @@ WorkingDirectory={{product_dir}}/activemq/bin
 ExecStart={{product_dir}}/activemq/bin/activemq start
 ExecStop={{product_dir}}/activemq/bin/activemq stop
 Restart=on-abort
-User={{amq_user}}
+User=root
 
 [Install]
 WantedBy=multi-user.target
