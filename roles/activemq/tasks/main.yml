@@ -25,7 +25,7 @@
       ignore_errors: True
 
     - name: Add ActiveMQ user
-      user: name="{{ amq_user }}" shell=/bin/bash group="{{ amq_group }}" state=present uid=802
+      user: name="{{ amq_user }}" shell=/bin/bash group="{{ amq_group }}" state=present uid=803
       ignore_errors: True
 
     #- name: Create base directory
