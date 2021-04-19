@@ -35,27 +35,20 @@
 
     - name: Create Java directory
       file:
-        path: "{{ java_home }}"
+        path: "{{ java_dir }}"
         state: directory
-
-#    - name: Unarchive JDK distribution from local source
-#      unarchive:
-#        src: "{{ product_package_location }}/lib/{{ jdk_name }}.tar.gz"
-#        dest: "{{ java_home }}"
-#      register: output
-#      when: pack_location == "local"
 
     - name: Unzip JDK Package from local source
       unarchive:
         src: "{{ product_package_location }}/lib/{{ jdk_name }}.tar.gz"
-        dest: "{{ java_home }}"
+        dest: "{{ java_dir }}"
         mode: u=rw,g=r,o=r
       when: pack_location == "local"
 
     - name: Unarchive JDK distribution from remote source
       unarchive:
         src: "{{ remote_jdk }}"
-        dest: "{{ java_home}}"
+        dest: "{{ java_dir }}"
         extra_opts: [--strip-components=1]
         remote_src: yes
       when: pack_location == "remote"
