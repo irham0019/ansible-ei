@@ -177,14 +177,14 @@
     #    mode:  0644
 
 
-#    - name: Change the owner of WSO2 directory
-#      file:
-#        path: "{{ target }}"
-#        state: directory
-#        recurse: true
-#        owner: "{{ amq_user }}"
-#        group: "{{ amq_group }}"
-#        mode: 0755
+    - name: Change the owner of amq directory
+      file:
+        path: "{{ target }}"
+        state: directory
+        recurse: true
+        owner: "{{ amq_user }}"
+        group: "{{ amq_group }}"
+        mode: 0755
 
 #    - name: Enable service
 #      service:
