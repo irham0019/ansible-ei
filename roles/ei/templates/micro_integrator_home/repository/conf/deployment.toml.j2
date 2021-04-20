@@ -19,3 +19,16 @@ file_name = "repository/resources/security/client-truststore.jks"
 password = "wso2carbon"
 alias = "symmetric.key.value"
 algorithm = "AES"
+
+[[datasource]]
+id = "WSO2_COORDINATION_DB"
+url= "{{ wso2ei_db_url }}"
+username="{{ wso2ei_db_username }}"
+password="{{ wso2ei_db_password }}"
+driver="{{ wso2ei_db_driver }}"
+pool_options.maxActive=50
+pool_options.maxWait = 60000
+pool_options.testOnBorrow = true
+
+[realm_manager]
+data_source = "new_id"

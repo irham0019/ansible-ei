@@ -16,6 +16,7 @@
 
 amq_group: activemq
 amq_user: activemq
+amq_host: wso2mqdev01.stuller.laf
 amq_gid: 802
 amq_product_name: apache-activemq
 amq_product_version: 5.16.1
@@ -52,8 +53,8 @@ amq_datasource:
   properties:
     #driverClassName: com.mysql.jdbc.Driver
     #url: "jdbc:mysql://{{ vault_amq_hostname }}:3306/{{ vault_amq_database }}?autoReconnect=true"
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: "jdbc:sqlserver://{{ vault_amq_hostname }}:1433;databaseName={{ vault_amq_database }};applicationIntent=ReadWrite"
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://{{ vault_amq_hostname }}:3306/{{ vault_amq_database }}?useSSL=false"
     username: "{{ vault_amq_username }}"
     password: "{{ vault_amq_password }}"
 

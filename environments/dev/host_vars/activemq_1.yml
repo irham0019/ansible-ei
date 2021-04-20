@@ -13,11 +13,21 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 # ----------------------------------------------------------------------------
+---
+vault_amq_database: AMQSQLDEV01
+vault_amq_username: wso2mquser
+vault_amq_password: Orac!e@123
+vault_amq_hostname: 10.0.1.223
+
+vault_amq_keystore_password: password
+
+vault_amq_web_users:
+  - username: admin
+    password: topsecret
+    rolename: admin
 
 wso2_group: wso2
 wso2_user: wso2carbon
-product_name: wso2is
-product_version: 5.9.0
 target: /mnt
 product_package_location: files
 
