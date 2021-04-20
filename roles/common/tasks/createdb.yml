@@ -1,0 +1,80 @@
+---
+- block:
+
+
+    - name: Installation Information
+      set_fact:
+          product_dir: "{{ target }}/ei"
+          carbon_home: "{{ target }}/ei/{{ product_name }}-{{ product_version }}"
+          micro_integrator_home: "{{ target }}/ei/{{ product_name }}-{{ product_version }}/micro-integrator"
+          micro_integrator_dashboard_home: "{{ target }}/ei/{{ product_name }}-{{ product_version }}/micro-integrator-dashboard"
+          cluster: "{{ ei_cluster }}"
+
+    # Set installation directory information
+    - name: install mysql repo for centos 7
+      yum:
+        state: installed
+        name: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+#      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+
+#    - name: install mysql repo for centos 6
+#      yum:
+#        state: installed
+#        name: http://repo.mysql.com/mysql-community-release-el6-7.noarch.rpm
+#      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
+
+    - name: install mysql packages
+      yum:
+        state: installed
+        name: ['mysql','MySQL-python']
+
+    - name: check to see if {{wso2ei_db_name}} database is populated by query mysql -u {{wso2ei_db_username}} -p{{wso2ei_db_password}} -h {{wso2ei_db_host}} -e "select count(*) from {{wso2ei_db_name}}.CURRENT_STATS;"
+      shell: 'mysql -u {{wso2ei_db_username}} -p{{wso2ei_db_password}} -h {{wso2ei_db_host}} -e "select count(*) from {{wso2ei_db_name}}.CURRENT_STATS;"'
+      register: idm_populated
+      failed_when: "'NEVER' in idm_populated.stderr"
+      changed_when: idm_populated.failed == "true"
+
+
+    - name: Import "{{ carbon_home }}/dbscripts/identity/mysql.sql" to "{{wso2ei_db_name}}"
+      mysql_db:
+        state: import
+        name: "{{wso2ei_db_name}}"
+        target: "{{ micro_integrator_home }}/dbscripts/mysql/mysql_cluster.sql"
+        login_host: "{{wso2ei_db_host}}"
+        login_user: "{{wso2ei_db_username}}"
+        login_password: "{{wso2ei_db_password}}"
+      no_log: true
+      ignore_errors: yes
+      when:
+        - idm_populated.rc == 1
+
+    - name: Import "{{ carbon_home }}/dbscripts/identity/mysql.sql" to "{{wso2ei_db_name}}"
+      mysql_db:
+        state: import
+        name: "{{wso2ei_db_name}}"
+        target: "{{ micro_integrator_home }}/dbscripts/mysql/mysql_transaction_count.sql"
+        login_host: "{{wso2ei_db_host}}"
+        login_user: "{{wso2ei_db_username}}"
+        login_password: "{{wso2ei_db_password}}"
+      no_log: true
+      ignore_errors: yes
+      when:
+        - idm_populated.rc == 1
+
+    - name: Import "{{ carbon_home }}/dbscripts/identity/mysql.sql" to "{{wso2ei_db_name}}"
+      mysql_db:
+        state: import
+        name: "{{wso2ei_db_name}}"
+        target: "{{ micro_integrator_home }}/dbscripts/mysql/mysql_user.sql"
+        login_host: "{{wso2ei_db_host}}"
+        login_user: "{{wso2ei_db_username}}"
+        login_password: "{{wso2ei_db_password}}"
+      no_log: true
+      ignore_errors: yes
+      when:
+        - idm_populated.rc == 1
+
+  when: inventory_hostname == run_db_query_node
+  become: true
+  become_method: sudo
+  become_user: root

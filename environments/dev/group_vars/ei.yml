@@ -22,7 +22,8 @@ target: /mnt
 product_package_location: files
 jdbc_driver: mysql-connector-java-8.0.22.jar
 oracle_jdbc_driver: ojdbc7.jar
-run_migration_node: is_1
+
+run_db_query_node: ei_1
 
 # Performance tuning configurations
 enable_performance_tuning: false
@@ -56,7 +57,11 @@ java_home: "{{ java_dir }}/{{ jdk_name }}"
 
 # Data source configurations for the shared database which hosts registry and user management tables
 wso2ei_db_type: mysql
-wso2ei_db_url: jdbc:mysql://10.0.1.223:3306/WSO2SQLDEV01?useSSL=false
+wso2ei_db_name: WSO2SQLDEV01
+wso2ei_db_host: 10.0.1.223
+wso2ei_db_port: 3306
+
+wso2ei_db_url: jdbc:mysql://{{wso2ei_db_host}}:{{wso2ei_db_port}}/{{wso2ei_db_name}}?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;autoReconnect=true&amp;requireSSL=false&amp;verifyServerCertificate=false&amp;serverTimezone=UTC
 wso2ei_db_username: wso2intuser
 wso2ei_db_password: Orac!e@123
 wso2ei_db_validation_query: "SELECT 1"
