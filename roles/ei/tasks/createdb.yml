@@ -27,8 +27,8 @@
       changed_when: idm_populated.failed == "true"
 
 
-    - name: Import
-      community.mysql.mysql_db:
+    - name: "Import {{ micro_integrator_home }}/dbscripts/mysql/mysql_cluster.sql to {{wso2ei_db_name}}"
+      mysql_db:
         state: import
         name: "{{wso2ei_db_name}}"
         target: "{{ micro_integrator_home }}/dbscripts/mysql/mysql_cluster.sql"
@@ -39,8 +39,8 @@
       when:
         - idm_populated.rc == 1
 
-    - name: Import
-      community.mysql.mysql_db:
+    - name: Import "{{ micro_integrator_home }}/dbscripts/mysql/mysql_transaction_count.sql" to "{{wso2ei_db_name}}"
+      mysql_db:
         state: import
         name: "{{wso2ei_db_name}}"
         target: "{{ micro_integrator_home }}/dbscripts/mysql/mysql_transaction_count.sql"
@@ -51,8 +51,8 @@
       when:
         - idm_populated.rc == 1
 
-    - name: Import 
-      community.mysql.mysql_db:
+    - name: Import "{{ micro_integrator_home }}/dbscripts/mysql/mysql_user.sql" to "{{wso2ei_db_name}}"
+      mysql_db:
         state: import
         name: "{{wso2ei_db_name}}"
         target: "{{ micro_integrator_home }}/dbscripts/mysql/mysql_user.sql"
