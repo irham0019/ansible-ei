@@ -80,6 +80,8 @@
         remote_src: yes
       when: pack_location == "remote"
 
+    - import_tasks: createdb.yml
+
     - name: Copy JDBC Driver "{{ micro_integrator_home }}/lib"
       copy:
        src: "{{ product_package_location }}/lib/{{ jdbc_driver }}"

@@ -1,13 +1,4 @@
 ---
-- block:
-
-    - name: Installation Information
-      set_fact:
-          product_dir: "{{ target }}/ei"
-          carbon_home: "{{ target }}/ei/{{ product_name }}-{{ product_version }}"
-          micro_integrator_home: "{{ target }}/ei/{{ product_name }}-{{ product_version }}/micro-integrator"
-          micro_integrator_dashboard_home: "{{ target }}/ei/{{ product_name }}-{{ product_version }}/micro-integrator-dashboard"
-          cluster: "{{ ei_cluster }}"
 
     # Set installation directory information
     - name: install mysql repo for centos 7

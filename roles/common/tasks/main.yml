@@ -59,8 +59,6 @@
         src: "{{ java_home }}"
         dest: "{{ java_symlink }}"
         state: link
-
-    - import_tasks: createdb.yml
       
     become: true
     become_user: root
