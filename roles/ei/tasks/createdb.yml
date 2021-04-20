@@ -27,7 +27,7 @@
       changed_when: idm_populated.failed == "true"
 
 
-    - name: Import "{{ micro_integrator_home }}/dbscripts/mysql/mysql_cluster.sql" to "{{wso2ei_db_name}}"
+    - name: Import "{{ micro_integrator_home }}"/dbscripts/mysql/mysql_cluster.sql to "{{wso2ei_db_name}}"
       community.mysql.mysql_db:
         state: import
         name: "{{wso2ei_db_name}}"
