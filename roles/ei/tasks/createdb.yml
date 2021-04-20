@@ -35,7 +35,6 @@
         login_host: "{{wso2ei_db_host}}"
         login_user: "{{wso2ei_db_username}}"
         login_password: "{{wso2ei_db_password}}"
-      no_log: true
       ignore_errors: yes
       when:
         - idm_populated.rc == 1
@@ -48,7 +47,6 @@
         login_host: "{{wso2ei_db_host}}"
         login_user: "{{wso2ei_db_username}}"
         login_password: "{{wso2ei_db_password}}"
-      no_log: true
       ignore_errors: yes
       when:
         - idm_populated.rc == 1
@@ -61,7 +59,6 @@
         login_host: "{{wso2ei_db_host}}"
         login_user: "{{wso2ei_db_username}}"
         login_password: "{{wso2ei_db_password}}"
-      no_log: true
       ignore_errors: yes
       when:
         - idm_populated.rc == 1
