@@ -1,7 +1,6 @@
 ---
 - block:
 
-
     - name: Installation Information
       set_fact:
           product_dir: "{{ target }}/ei"
@@ -15,20 +14,6 @@
       yum:
         state: installed
         name: https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
-#      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
-
-#    - name: install mysql repo for centos 6
-#      yum:
-#        state: installed
-#        name: http://repo.mysql.com/mysql-community-release-el6-7.noarch.rpm
-#      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
-#  [root@wso2eidev01 ~]# mysql -u wso2intuser -p'Orac!e@123' -h 10.0.1.223 -e "select count(*) from WSO2SQLDEV01.CURRENT_STATS";
-#      Warning: Using a password on the command line interface can be insecure.
-#      ERROR 2059 (HY000): Authentication plugin 'caching_sha2_password' cannot be loaded: /usr/lib64/mysql/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory
-
-#TASK [common : check to see if WSO2SQLDEV01 database is populated by query mysql -u wso2intuser -pOrac!e@123 -h 10.0.1.223 -e "select count(*) from WSO2SQLDEV01.CURRENT_STATS;"] ***********************************************************
-#skipping: [ei_2]
-
 
     - name: install mysql packages
       yum:
@@ -42,7 +27,7 @@
       changed_when: idm_populated.failed == "true"
 
 
-    - name: Import "{{ micro_integrator_home }}/dbscripts/mysql/mysql_cluster.sql" to "{{wso2ei_db_name}}"
+    - name: "Import {{ micro_integrator_home }}/dbscripts/mysql/mysql_cluster.sql to {{wso2ei_db_name}}"
       mysql_db:
         state: import
         name: "{{wso2ei_db_name}}"
