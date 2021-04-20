@@ -42,7 +42,7 @@
       changed_when: idm_populated.failed == "true"
 
 
-    - name: Import "{{ carbon_home }}/dbscripts/identity/mysql.sql" to "{{wso2ei_db_name}}"
+    - name: Import "{{ micro_integrator_home }}/dbscripts/mysql/mysql_cluster.sql" to "{{wso2ei_db_name}}"
       mysql_db:
         state: import
         name: "{{wso2ei_db_name}}"
@@ -55,7 +55,7 @@
       when:
         - idm_populated.rc == 1
 
-    - name: Import "{{ carbon_home }}/dbscripts/identity/mysql.sql" to "{{wso2ei_db_name}}"
+    - name: Import "{{ micro_integrator_home }}/dbscripts/mysql/mysql_transaction_count.sql" to "{{wso2ei_db_name}}"
       mysql_db:
         state: import
         name: "{{wso2ei_db_name}}"
@@ -68,7 +68,7 @@
       when:
         - idm_populated.rc == 1
 
-    - name: Import "{{ carbon_home }}/dbscripts/identity/mysql.sql" to "{{wso2ei_db_name}}"
+    - name: Import "{{ micro_integrator_home }}/dbscripts/mysql/mysql_user.sql" to "{{wso2ei_db_name}}"
       mysql_db:
         state: import
         name: "{{wso2ei_db_name}}"
