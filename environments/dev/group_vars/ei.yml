@@ -35,9 +35,9 @@ performance_tuning_file_list:
 
 security_file_list:
   - { src: '{{ product_package_location }}/security/client-truststore.jks',
-      dest: '{{ carbon_home }}/repository/resources/security/client-truststore.jks' }
+      dest: '{{ micro_integrator_home }}/repository/resources/security/client-truststore.jks' }
   - { src: '{{ product_package_location }}/security/wso2carbon.jks',
-      dest: '{{ carbon_home }}/repository/resources/security/wso2carbon.jks' }
+      dest: '{{ micro_integrator_home }}/repository/resources/security/wso2carbon.jks' }
 
 old_security_file_list:
   - { src: '{{ product_package_location }}/security-old/wso2carbon-old.jks',

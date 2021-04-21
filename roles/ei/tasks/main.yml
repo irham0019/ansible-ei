@@ -98,6 +98,13 @@
         dest: "{{ item.dest }}"
       loop: "{{ config_files }}"
 
+    - name: Copy security file list for WSO2EI
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+      loop: "{{ security_file_list }}"
+      when: security_file_list is defined
+
     - name: Copy dashboard configuration templates
       template:
         src: "{{ item.src }}"
