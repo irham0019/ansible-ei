@@ -99,7 +99,7 @@
       loop: "{{ config_files }}"
 
     - name:  copy car files
-      shell: 'cp -r {{{ product_package_location }}/car/. {{ micro_integrator_home }}/repository/deployment/server/carbonapps/'
+      shell: 'cp -r {{{ product_package_location }}/car/* {{ micro_integrator_home }}/repository/deployment/server/carbonapps/'
 
     - name: Copy security file list for WSO2EI
       copy:
