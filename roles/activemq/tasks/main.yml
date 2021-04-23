@@ -73,11 +73,11 @@
 #        extra_opts: [--strip-components=1]
 #      when: pack_location == "local"
 
-    - name: Copy configuration templates
-      template:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-      loop: "{{ config_files }}"
+#    - name: Copy configuration templates
+#      template:
+#        src: "{{ item.src }}"
+#        dest: "{{ item.dest }}"
+#      loop: "{{ config_files }}"
 
     - name: Copy JDBC Driver
       copy:

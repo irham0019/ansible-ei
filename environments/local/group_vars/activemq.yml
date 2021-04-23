@@ -18,7 +18,7 @@ amq_group: wso2
 amq_user: wso2carbon
 amq_gid: 802
 amq_product_name: apache-activemq
-amq_product_version: 5.16.1
+amq_product_version: 5.8.0
 amq_base_dir: /mnt
 target: /mnt
 product_package_location: files
