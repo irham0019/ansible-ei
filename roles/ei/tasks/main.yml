@@ -28,7 +28,11 @@
       debug:
         msg: "The operating system ei --- cluster - {{ cluster }} -- inventory_hostname - {{ inventory_hostname }} - micro_integrator_home-{{micro_integrator_home}}"
 
-    # WSO2 Distribution
+    - name: "Ansible | Print a variable"
+      debug:
+        msg: "The operating system ei --- cluster {{ hostvars[groups['activemq'][0]].ansible_host }}"
+
+    # WSO2 Distribution {{ hostvars['host_group'].custom_var }}
     - name: Create product directory
       file:
         path: "{{ product_dir }}"
@@ -84,13 +88,13 @@
 
     - name: Copy JDBC Driver "{{ micro_integrator_home }}/lib"
       copy:
-       src: "{{ product_package_location }}/lib/{{ jdbc_driver }}"
-       dest: "{{ micro_integrator_home }}/lib"
+       src: "{{ product_package_location }}/lib"
+       dest: "{{ micro_integrator_home }}"
 
-    - name: Copy JDBC Driver
-      copy:
-        src: "{{ product_package_location }}/lib/{{ oracle_jdbc_driver }}"
-        dest: "{{ micro_integrator_home }}/lib"
+#    - name: Copy JDBC Driver
+#      copy:
+#        src: "{{ product_package_location }}/lib/{{ oracle_jdbc_driver }}"
+#        dest: "{{ micro_integrator_home }}/lib"
 
     - name: Copy configuration templates
       template:

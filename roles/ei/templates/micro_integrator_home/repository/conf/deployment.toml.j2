@@ -32,3 +32,29 @@ pool_options.testOnBorrow = true
 
 [realm_manager]
 data_source = "new_id"
+
+[[transport.jms.sender]]
+name = "myTopicSender"
+parameter.initial_naming_factory = "org.apache.activemq.jndi.ActiveMQInitialContextFactory"
+parameter.provider_url = "tcp://{{ hostvars[groups['activemq'][0]].ansible_host }}:61616"
+parameter.connection_factory_name = "TopicConnectionFactory"
+parameter.connection_factory_type = "topic"
+parameter.cache_level = "producer"
+
+[[transport.jms.sender]]
+name = "myQueueSender"
+parameter.initial_naming_factory = "org.apache.activemq.jndi.ActiveMQInitialContextFactory"
+parameter.provider_url = "tcp://{{ hostvars[groups['activemq'][0]].ansible_host }}:61616"
+parameter.connection_factory_name = "QueueConnectionFactory"
+parameter.connection_factory_type = "queue"
+parameter.cache_level = "producer"
+
+[[transport.jms.listener]]
+name = "myTopicListener"
+parameter.initial_naming_factory = "org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory"
+parameter.provider_url = "tcp://{{ hostvars[groups['activemq'][0]].ansible_host }}:61616"
+parameter.connection_factory_name = "TopicConnectionFactory"
+parameter.connection_factory_type = "topic"
+parameter.cache_level = "consumer"
+parameter.username = "system"
+parameter.password = "manager"
