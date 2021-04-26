@@ -51,10 +51,16 @@ parameter.cache_level = "producer"
 
 [[transport.jms.listener]]
 name = "myTopicListener"
-parameter.initial_naming_factory = "org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory"
+parameter.initial_naming_factory = "org.apache.activemq.jndi.ActiveMQInitialContextFactory"
 parameter.provider_url = "tcp://{{ hostvars[groups['activemq'][0]].ansible_host }}:61616"
 parameter.connection_factory_name = "TopicConnectionFactory"
 parameter.connection_factory_type = "topic"
 parameter.cache_level = "consumer"
 parameter.username = "system"
 parameter.password = "manager"
+
+[task_handling]
+resolver_class = "org.wso2.micro.integrator.ntask.coordination.task.resolver.RoundRobinResolver"
+
+[[task_resolver]]
+task_server_count = "2"
