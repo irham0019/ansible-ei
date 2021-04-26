@@ -35,6 +35,13 @@
     #    group: "{{ amq_group }}"
     #    mode:  0750
     #    state: directory
+
+    - name: Stop activemq as a service
+      systemd:
+        name: activemq
+        state: stopped
+      ignore_errors: yes
+
     - name: Create systemd service for ActiveMQ
       template:
         src:  activemq.service.j2
