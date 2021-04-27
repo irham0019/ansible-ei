@@ -17,22 +17,22 @@
 ---
 # This playbook deploys the whole application stack in this site.
 
-- name: Apply common configuration to all nodes
-  hosts: all
-  roles:
-    - common
+#- name: Apply common configuration to all nodes
+#  hosts: all
+#  roles:
+#    - common
 
 - name: Apply Identity Server configuration to is nodes
   hosts:
     - ei_1
-    - ei_2
+#    - ei_2
   roles:
     - ei
 
-- name: Apply Identity Server configuration to is nodes
-  hosts:
-    - activemq_1
-  roles:
-    - activemq
+#- name: Apply Identity Server configuration to is nodes
+#  hosts:
+#    - activemq_1
+#  roles:
+#    - activemq
 
 
