@@ -117,7 +117,7 @@ config_files:
 
 dashboard_config_files:
   - { src: 'micro_integrator_dashboard_home/repository/conf/deployment.yaml.j2',
-      dest: '{{ micro_integrator_dashboard_home }}/conf/deployment.yaml' }
+      dest: '{{ micro_integrator_dashboard_home }}/conf/server/deployment.yaml' }
   - { src: 'micro_integrator_dashboard_home/bin/dashboard.sh.j2',
       dest: '{{ micro_integrator_dashboard_home }}/bin/dashboard.sh' }
 
