@@ -105,7 +105,7 @@
     - name: Copy JDBC Driver
       copy:
         src: "{{ product_package_location }}/carbonapps"
-        dest: "{{ micro_integrator_home }}/repository/deployment/server/carbonapps"
+        dest: "{{ micro_integrator_home }}/repository/deployment/server"
 
 
     - name: Copy security file list for WSO2EI
