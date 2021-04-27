@@ -40,12 +40,12 @@ wso2.transport.http:
   listenerConfigurations:
     -
       id: "http"
-      host: "0.0.0.0"
+      host: "wso2eidev01.stuller.laf"
       port: 9390
       scheme: http
     -
       id: "https"
-      host: "0.0.0.0"
+      host: "wso2eidev01.stuller.laf"
       port: 9743
       scheme: https
       keyStoreFile: "${carbon.home}/resources/security/wso2carbon.jks"
@@ -102,7 +102,7 @@ databridge.config:
         sslPort: '9711'
         tcpReceiverThreadPoolSize: '100'
         sslReceiverThreadPoolSize: '100'
-        hostName: 0.0.0.0
+        hostName: wso2eidev01.stuller.laf
 
   # Configuration of the Data Agents - to publish events through databridge
 data.agent.config:
