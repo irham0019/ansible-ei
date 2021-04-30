@@ -43,13 +43,16 @@ This repository contains the Ansible scripts for installing and configuring WSO2
 │   │   └── inventory
 │   ├── prod
 │   │   ├── group_vars
+│   │   │   ├── activemq.yml
 │   │   │   └── ei.yml
 │   │   ├── host_vars
+│   │   │   ├── activemq_1.yml
 │   │   │   ├── ei_1.yml
 │   │   │   └── ei_2.yml
 │   │   └── inventory
 │   └── test
 │       ├── group_vars
+│       │   ├── activemq.yml
 │       │   └── ei.yml
 │       ├── host_vars
 │       │   ├── ei_1.yml
@@ -72,7 +75,10 @@ This repository contains the Ansible scripts for installing and configuring WSO2
 │   │   ├── SSEBSAWLPickDOwnloadCAR_1.0.0.car
 │   │   ├── SSGVEBSGetItemPriceAPI_CAR_1.0.0.car
 │   │   └── StullerSharedResources-car_1.0.0.car
+│   ├── db
+│   │   └── mysql.sql
 │   ├── lib
+│   │   ├── TCPDispatchMediator-1.0.0.jar
 │   │   ├── activeio-core-3.1.4.jar
 │   │   ├── activemq-broker-5.15.14.jar
 │   │   ├── activemq-client-5.15.14.jar
@@ -147,10 +153,8 @@ This repository contains the Ansible scripts for installing and configuring WSO2
 │           │       └── conf
 │           │           └── deployment.toml.j2
 │           └── wso2is.service.j2
-├── scripts
-│   ├── update.sh
-│   └── update_README.md
-└── site.yml
+├── site.yml
+└── stuller-architecture.jpg
 ```
 
 Packs could be either copied to a local directory, or downloaded from a remote location.
