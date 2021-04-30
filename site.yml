@@ -17,11 +17,11 @@
 ---
 # This playbook deploys the whole application stack in this site.
 
-#- name: Apply common configuration to all nodes
-#  hosts: all
-#  roles:
-#    - common
-#
+- name: Apply common configuration to all nodes
+  hosts: all
+  roles:
+    - common
+
 - name: Apply Identity Server configuration to is nodes
   hosts:
     - ei_1
