@@ -166,10 +166,20 @@ Copy the following files to `files/packs` directory.
 1. [WSO2 EI 7.1.0 package](https://wso2.com/integration/#)
 2. [ActiveMQ 5.15.14](https://activemq.apache.org/activemq-5015014-release)
 3. [Amazon Coretto for Linux x64 JDK](https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html)
+
 Copy the following files to `files/lib` directory.
 
 1. [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/5.1.html)
-2. [Amazon Coretto for Linux x64 JDK](https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html)
+2. Copy the following client libraries from the ACTIVEMQ_HOME/lib directory to the MI_HOME/lib directory.
+activemq-broker-5.8.0.jar
+activemq-client-5.8.0.jar
+activemq-kahadb-store-5.8.0.jar
+geronimo-jms_1.1_spec-1.1.1.jar
+geronimo-j2ee-management_1.1_spec-1.0.1.jar
+geronimo-jta_1.0.1B_spec-1.0.1.jar
+hawtbuf-1.9.jar
+Slf4j-api-1.6.6.jar
+activeio-core-3.1.4.jar (available in the ACTIVEMQ_HOME/lib/optional directory)
 
 ## Downloading from remote location
 
