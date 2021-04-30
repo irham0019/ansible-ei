@@ -175,7 +175,7 @@ In **group_vars**, change the values of the following variables in all groups:
 ## Running WSO2 EI Ansible scripts
 
 ### 1. Run the existing scripts without customization
-The existing Ansible scripts contain the configurations to set-up a HA WSO2 EI pattern. In order to deploy the pattern, you need to replace the `[ip_address]` given in the `inventory` file under `dev` folder by the IP of the location where you need to host the Identity Server. An example is given below.
+The existing Ansible scripts contain the configurations to set-up a HA WSO2 EI pattern. In order to deploy the pattern, you need to replace the `[ip_address]` given in the `inventory` file under `dev` folder by the IP of the location where you need to host the EI. An example is given below.
 ```
 [ei]
 ei_1 ansible_host=34.121.29.75 ansible_user=user

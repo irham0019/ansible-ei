@@ -1,7 +1,7 @@
-# Pattern 1 - HA clustered deployment of WSO2 Identity Server
+# Pattern 1 - HA clustered deployment of WSO2 EI
 
 ## Deployment diagram
-![HA clustered deployment of WSO2 Identity Server](images/Deployment-pattern-1-diagram.png)
+![HA clustered deployment of WSO2 EI](images/Deployment-pattern-1-diagram.png)
 
 ## Changing hostname and ports
 1. Uncomment the parameters in the `is_2.yml` and give the values for both `is_1.yml` and `is_2.yml`, following the [documentation](https://docs.wso2.com/display/IS560/Setting+Up+Deployment+Pattern+1) to deploy pattern 1.
@@ -29,7 +29,7 @@ NOTE: This hostname is used by the cluster. It must be defined in the /etc/hosts
 
 ## Adding a new file to the templates to parameterize
 
-1. Add the parameterized file to the `templates/carbon-home` directory. This maintains the exact folder structure of the WSO2 Identity Server pack.
+1. Add the parameterized file to the `templates/carbon-home` directory. This maintains the exact folder structure of the WSO2 EI pack.
 
 2. Add the action you need to take on the above file to the `customs.yml` file as mentioned in [here](master#step-2).
 

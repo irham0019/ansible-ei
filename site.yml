@@ -22,14 +22,14 @@
   roles:
     - common
 
-- name: Apply Identity Server configuration to is nodes
+- name: Apply EI configuration to is nodes
   hosts:
     - ei_1
     - ei_2
   roles:
     - ei
 
-- name: Apply Identity Server configuration to is nodes
+- name: Apply EI configuration to is nodes
   hosts:
     - activemq_1
   roles:
