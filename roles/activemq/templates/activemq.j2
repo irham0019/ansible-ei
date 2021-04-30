@@ -127,7 +127,7 @@ if [ -z "$ACTIVEMQ_CONF" ] ; then
 fi
 
 # Configure a user with non root privileges, if no user is specified do not change user
-ACTIVEMQ_USER="{{ amq_user }}"
+
 if [ -z "$ACTIVEMQ_USER" ] ; then
     ACTIVEMQ_USER=""
 fi

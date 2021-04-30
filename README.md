@@ -1,78 +1,152 @@
-# WSO2 Identity Server Ansible scripts
+# WSO2 EI 7.1.0 Ansible scripts
 
 This repository contains the Ansible scripts for installing and configuring WSO2 EI.
 
 ## Supported Operating Systems
 
-- Ubuntu 16.04 or higher
 - CentOS 7
 
 ## Supported Ansible Versions
 
-- Ansible 2.6.2
+- Ansible 2.9.7
+
+![WSO2 EI 7.1.0 and ActiveMQ 2 deployment architecture ](https://github.com/irham0019/ansible-ei/blob/main/stuller-architecture.jpg)
 
 ## Directory Structure
 ```
 .
 ├── README.md
-├── ansible-is.iml
-├── dev
-│   ├── group_vars
-│   │   ├── ei-migration.yml
-│   │   └── ei.yml
-│   ├── host_vars
-│   │   └── ei_1.yml
-│   └── inventory
+├── ansible-ei.iml
+├── ansible.cfg
 ├── docs
 │   ├── Pattern1.md
-│   ├── Pattern2.md
 │   └── images
-│       ├── Deployment-pattern-1-diagram.png
-│       └── Deployment-pattern-2-diagram.png
+│       └── Deployment-pattern-1-diagram.png
+├── environments
+│   ├── dev
+│   │   ├── group_vars
+│   │   │   ├── activemq.yml
+│   │   │   └── ei.yml
+│   │   ├── host_vars
+│   │   │   ├── activemq_1.yml
+│   │   │   ├── ei_1.yml
+│   │   │   └── ei_2.yml
+│   │   └── inventory
+│   ├── local
+│   │   ├── group_vars
+│   │   │   ├── activemq.yml
+│   │   │   └── ei.yml
+│   │   ├── host_vars
+│   │   │   ├── activemq_1.yml
+│   │   │   ├── ei_1.yml
+│   │   │   └── ei_2.yml
+│   │   └── inventory
+│   ├── prod
+│   │   ├── group_vars
+│   │   │   └── ei.yml
+│   │   ├── host_vars
+│   │   │   ├── ei_1.yml
+│   │   │   └── ei_2.yml
+│   │   └── inventory
+│   └── test
+│       ├── group_vars
+│       │   └── ei.yml
+│       ├── host_vars
+│       │   ├── ei_1.yml
+│       │   └── ei_2.yml
+│       └── inventory
 ├── files
+│   ├── carbonapps
+│   │   ├── SSAWLEBSCycleCountConfirmationCAR_1.0.0.car
+│   │   ├── SSAWLEBSPickConfirmCAR_1.0.0.car
+│   │   ├── SSAWLEBSPutAwayConfirmCAR_1.0.0.car
+│   │   ├── SSEBSAMZNCreateShipmentCAR_1.0.0.car
+│   │   ├── SSEBSAWLCycleCountDownloadCAR_1.0.0.car
+│   │   ├── SSEBSAWLDelCycleCntDownloadCAR_1.0.0.car
+│   │   ├── SSEBSAWLDeletePutAwayCAR_1.0.0.car
+│   │   ├── SSEBSAWLInductionCAR_1.0.0.car
+│   │   ├── SSEBSAWLInventoryAdjustmentCAR_1.0.0.car
+│   │   ├── SSEBSAWLItemOnHandLocationCAR_1.0.0.car
+│   │   ├── SSEBSAWLPartMasterAliasCAR_1.0.0.car
+│   │   ├── SSEBSAWLPartMasterCAR_1.0.0.car
+│   │   ├── SSEBSAWLPickDOwnloadCAR_1.0.0.car
+│   │   ├── SSGVEBSGetItemPriceAPI_CAR_1.0.0.car
+│   │   └── StullerSharedResources-car_1.0.0.car
 │   ├── lib
-│   │   ├── amazon-corretto-8.242.08.1-linux-x64.tar.gz
-│   │   └── mysql-connector-java-8.0.22.jar
-│   ├── migration-scripts
-│   │   ├── migration-resources.zip
-│   │   └── org.wso2.carbon.ei.migration-1.0.101.jar
+│   │   ├── activeio-core-3.1.4.jar
+│   │   ├── activemq-broker-5.15.14.jar
+│   │   ├── activemq-client-5.15.14.jar
+│   │   ├── activemq-kahadb-store-5.15.14.jar
+│   │   ├── geronimo-j2ee-management_1.1_spec-1.0.1.jar
+│   │   ├── geronimo-jms_1.1_spec-1.1.1.jar
+│   │   ├── geronimo-jta_1.1_spec-1.1.1.jar
+│   │   ├── hawtbuf-1.11.jar
+│   │   ├── mysql-connector-java-8.0.22.jar
+│   │   ├── ojdbc7.jar
+│   │   └── slf4j-api-1.7.30.jar
 │   ├── packs
-│   │   └── wso2ei-5.9.0.zip
+│   │   ├── amazon-corretto-8.282.08.1-linux-x64.tar.gz
+│   │   ├── apache-activemq-5.15.14-bin.tar.gz
+│   │   └── wso2ei-7.1.0.zip
 │   ├── security
 │   │   ├── client-truststore.jks
 │   │   └── wso2carbon.jks
-│   ├── security-old
-│   │   └── wso2carbon-old.jks
-│   ├── system
-│   │   └── etc
-│   │       ├── security
-│   │       │   └── limits.conf
-│   │       └── sysctl.conf
-│   └── tenants
-│       └── tenants.zip
+│   └── system
+│       └── etc
+│           ├── security
+│           │   └── limits.conf
+│           └── sysctl.conf
 ├── issue_template.md
 ├── pull_request_template.md
 ├── roles
+│   ├── activemq
+│   │   ├── handlers
+│   │   │   └── main.yml
+│   │   ├── tasks
+│   │   │   ├── hawtio.yml
+│   │   │   └── main.yml
+│   │   └── templates
+│   │       ├── activemq.j2
+│   │       ├── activemq.service.j2
+│   │       ├── activemq.xml.j2
+│   │       ├── jetty-realm.properties.j2
+│   │       ├── jetty.xml.j2
+│   │       └── login.config.j2
 │   ├── common
 │   │   └── tasks
 │   │       ├── custom.yml
 │   │       └── main.yml
 │   ├── ei
 │   │   ├── tasks
+│   │   │   ├── createdb.yml
 │   │   │   ├── custom.yml
 │   │   │   └── main.yml
 │   │   └── templates
-│   │       ├── carbon-home
+│   │       ├── micro_integrator_dashboard_home
 │   │       │   ├── bin
-│   │       │   │   └── wso2server.sh.j2
-│   │       │   └── repository
-│   │       │       ├── conf
-│   │       │       │   ├── deployment.toml.j2
-│   │       └── wso2ei.service.j2
-│   └── ei-migration
-│       └── tasks
-│           ├── custom.yml
-│           └── main.yml
+│   │       │   │   └── dashboard.sh.j2
+│   │       │   ├── repository
+│   │       │   │   └── conf
+│   │       │   │       └── deployment.yaml.j2
+│   │       │   └── wso2ei-dashboard.service.j2
+│   │       └── micro_integrator_home
+│   │           ├── bin
+│   │           │   └── micro-integrator.sh.j2
+│   │           ├── repository
+│   │           │   └── conf
+│   │           │       └── deployment.toml.j2
+│   │           └── wso2ei.service.j2
+│   └── start
+│       ├── tasks
+│       │   └── main.yml
+│       └── templates
+│           ├── carbon-home
+│           │   ├── bin
+│           │   │   └── wso2server.sh.j2
+│           │   └── repository
+│           │       └── conf
+│           │           └── deployment.toml.j2
+│           └── wso2is.service.j2
 ├── scripts
 │   ├── update.sh
 │   └── update_README.md
@@ -85,7 +159,9 @@ Packs could be either copied to a local directory, or downloaded from a remote l
 
 Copy the following files to `files/packs` directory.
 
-1. [WSO2 Identity Server 5.9.0 package](https://wso2.com/identity-and-access-management/install)
+1. [WSO2 EI 7.1.0 package](https://wso2.com/integration/#)
+2. [ActiveMQ 5.15.14](https://activemq.apache.org/activemq-5015014-release)
+3. [Amazon Coretto for Linux x64 JDK](https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html)
 Copy the following files to `files/lib` directory.
 
 1. [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/5.1.html)
@@ -95,21 +171,23 @@ Copy the following files to `files/lib` directory.
 
 In **group_vars**, change the values of the following variables in all groups:
 1. The value of `pack_location` should be changed from "local" to "remote"
-2. The value of `remote_jdk` should be changed to the URL in which the JDK should be downloaded from, and remove it as a comment.
-3. The value of `remote_pack` should be changed to the URL in which the package should be downloaded from, and remove it as a comment.
 
-## Running WSO2 Identity Server Ansible scripts
+## Running WSO2 EI Ansible scripts
 
 ### 1. Run the existing scripts without customization
-The existing Ansible scripts contain the configurations to set-up a single node WSO2 Identity Server pattern. In order to deploy the pattern, you need to replace the `[ip_address]` given in the `inventory` file under `dev` folder by the IP of the location where you need to host the Identity Server. An example is given below.
+The existing Ansible scripts contain the configurations to set-up a HA WSO2 EI pattern. In order to deploy the pattern, you need to replace the `[ip_address]` given in the `inventory` file under `dev` folder by the IP of the location where you need to host the Identity Server. An example is given below.
 ```
 [ei]
-wso2ei ansible_host=172.28.128.4
+ei_1 ansible_host=34.121.29.75 ansible_user=user
+ei_2 ansible_host=35.202.118.190 ansible_user=user
+
+[activemq]
+activemq_1 ansible_host=35.184.193.49 ansible_user=user
 ```
 
 Run the following command to run the scripts.
 
-`ansible-playbook -i dev site.yml`
+`ansible-playbook -i environments/dev site.yml`
 
 If you need to alter the configurations given, please change the parameterized values in the yaml files under `group_vars` and `host_vars`.
 

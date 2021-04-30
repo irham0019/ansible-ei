@@ -20,3 +20,5 @@
 
 hostname: 35.202.118.190
 port_offset: 0
+
+wso2ei_dashboard_enable: False

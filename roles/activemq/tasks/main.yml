@@ -175,13 +175,13 @@
     #  tags:
     #  - config
 
-    #- name: Create ActiveMQ defaults file for service
-    #  template:
-    #    src:   "activemq.j2"
-    #    dest:  "/etc/default/activemq"
-    #    owner: "root"
-    #    group: "root"
-    #    mode:  0644
+    - name: Create ActiveMQ defaults file for service
+      template:
+        src:   "activemq.j2"
+        dest:  "{{activemq_home}}/bin/activemq"
+        owner: "{{ amq_user }}"
+        group: "{{ amq_group }}"
+        mode:  0644
 
 
     - name: Change the owner of amq directory

@@ -26,39 +26,15 @@
       failed_when: "'NEVER' in idm_populated.stderr"
       changed_when: idm_populated.failed == "true"
 
+    - name: Copy Mysql script
+      copy:
+        src: "{{ product_package_location }}/db/mysql.sql"
+        dest: "{{ micro_integrator_home }}/dbscripts/mysql/"
 
-    - name: "Import {{ micro_integrator_home }}/dbscripts/mysql/mysql_cluster.sql to {{wso2ei_db_name}}"
-      mysql_db:
-        state: import
-        name: "{{wso2ei_db_name}}"
-        target: "{{ micro_integrator_home }}/dbscripts/mysql/mysql_cluster.sql"
-        login_host: "{{wso2ei_db_host}}"
-        login_user: "{{wso2ei_db_username}}"
-        login_password: "{{wso2ei_db_password}}"
-      ignore_errors: yes
-      when:
-        - idm_populated.rc == 1
-
-    - name: Import "{{ micro_integrator_home }}/dbscripts/mysql/mysql_transaction_count.sql" to "{{wso2ei_db_name}}"
-      mysql_db:
-        state: import
-        name: "{{wso2ei_db_name}}"
-        target: "{{ micro_integrator_home }}/dbscripts/mysql/mysql_transaction_count.sql"
-        login_host: "{{wso2ei_db_host}}"
-        login_user: "{{wso2ei_db_username}}"
-        login_password: "{{wso2ei_db_password}}"
-      ignore_errors: yes
-      when:
-        - idm_populated.rc == 1
-
-    - name: Import "{{ micro_integrator_home }}/dbscripts/mysql/mysql_user.sql" to "{{wso2ei_db_name}}"
-      mysql_db:
-        state: import
-        name: "{{wso2ei_db_name}}"
-        target: "{{ micro_integrator_home }}/dbscripts/mysql/mysql_user.sql"
-        login_host: "{{wso2ei_db_host}}"
-        login_user: "{{wso2ei_db_username}}"
-        login_password: "{{wso2ei_db_password}}"
+    - name: check to see if {{wso2ei_db_name}} database is populated by query mysql -u {{wso2ei_db_username}} -p{{wso2ei_db_password}} -h {{wso2ei_db_host}} {{wso2ei_db_name}} < {{ micro_integrator_home }}/dbscripts/mysql/mysql.sql"
+      shell: 'mysql -u {{wso2ei_db_username}} -p{{wso2ei_db_password}} -h {{wso2ei_db_host}} {{wso2ei_db_name}} < {{ micro_integrator_home }}/dbscripts/mysql/mysql.sql'
+      register: idm_populated
+      failed_when: "'NEVER' in idm_populated.stderr"
       ignore_errors: yes
       when:
         - idm_populated.rc == 1
