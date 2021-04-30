@@ -171,6 +171,7 @@ Copy the following files to `files/lib` directory.
 
 1. [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/5.1.html)
 2. Copy the following client libraries from the ACTIVEMQ_HOME/lib directory to the MI_HOME/lib directory.
+```
 activemq-broker-5.8.0.jar
 activemq-client-5.8.0.jar
 activemq-kahadb-store-5.8.0.jar
@@ -180,6 +181,7 @@ geronimo-jta_1.0.1B_spec-1.0.1.jar
 hawtbuf-1.9.jar
 Slf4j-api-1.6.6.jar
 activeio-core-3.1.4.jar (available in the ACTIVEMQ_HOME/lib/optional directory)
+```
 
 ## Downloading from remote location
 
