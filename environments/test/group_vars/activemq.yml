@@ -16,7 +16,6 @@
 
 amq_group: activemq
 amq_user: activemq
-amq_host: wso2mqdev01.stuller.laf
 amq_gid: 802
 amq_product_name: apache-activemq
 amq_product_version: 5.15.14
@@ -34,7 +33,6 @@ java_dir: /opt
 java_symlink: "{{ java_dir }}/java"
 java_home: "{{ java_dir }}/{{ jdk_name }}"
 
-amq_broker_name: wso2mqdev01.stuller.laf
 
 pack_location: local
 
