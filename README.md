@@ -201,6 +201,10 @@ ei_2 ansible_host=35.202.118.190 ansible_user=user
 activemq_1 ansible_host=35.184.193.49 ansible_user=user
 ```
 
+Run the following command to encrypt string.
+
+`ansible-vault encrypt_string --vault-password-file a_password_file 'foobar' --name 'the_secret'`
+
 Run the following command to run the scripts.
 
 `ansible-playbook -i environments/dev site.yml`
