@@ -1,6 +1,6 @@
 [ei]
-ei_1 ansible_host=35.224.136.206 ansible_user=irham_integration ansible_ssh_private_key_file=~/.ssh/id_rsa
-ei_2 ansible_host=34.67.183.9 ansible_user=irham_integration ansible_ssh_private_key_file=~/.ssh/id_rsa
+ei_1 ansible_host=34.121.255.14 ansible_user=irham_integration ansible_ssh_private_key_file=~/.ssh/id_rsa
+ei_2 ansible_host=35.224.125.133 ansible_user=irham_integration ansible_ssh_private_key_file=~/.ssh/id_rsa
 
 [activemq]
-activemq_1 ansible_host=34.68.242.210 ansible_user=irham_integration ansible_ssh_private_key_file=~/.ssh/id_rsa
+activemq_1 ansible_host=34.66.21.245 ansible_user=irham_integration ansible_ssh_private_key_file=~/.ssh/id_rsa

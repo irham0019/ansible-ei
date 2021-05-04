@@ -48,7 +48,6 @@ amq_additional_files:
   #   destination: /conf/broker.ts
 
 amq_datasource:
-  #id: mssql-ds
   id: mysql-ds
   class: org.apache.commons.dbcp2.BasicDataSource
   properties:

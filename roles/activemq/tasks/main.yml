@@ -159,21 +159,21 @@
     #    state: reloaded
 
 
-    #- name: Configure ActiveMQ
-    #  template:
-    #    src:   "{{ item }}"
-    #    dest:  "{{ amq_base_dir }}/activemq/conf/{{ item | regex_replace('\\.j2$','') }}"
-    #    owner: "{{ amq_user }}"
-    #    group: "{{ amq_group }}"
-    #    mode:  0640
-    #  with_items:
-    #  - activemq.xml.j2
-    #  - jetty-realm.properties.j2
-    #  - jetty.xml.j2
-    #  - login.config.j2
-    #  notify: "restart activemq"
-    #  tags:
-    #  - config
+    - name: Configure ActiveMQ
+      template:
+        src:   "{{ item }}"
+        dest:  "{{ activemq_home }}/conf/{{ item | regex_replace('\\.j2$','') }}"
+        owner: "{{ amq_user }}"
+        group: "{{ amq_group }}"
+        mode:  0640
+      with_items:
+      - activemq.xml.j2
+#      - jetty-realm.properties.j2
+#      - jetty.xml.j2
+#      - login.config.j2
+#      notify: "restart activemq"
+      tags:
+      - config
 
     - name: Create ActiveMQ defaults file for service
       template:

@@ -86,7 +86,7 @@
 
     - import_tasks: createdb.yml
 
-    - name: Copy JDBC Driver "{{ micro_integrator_home }}/lib"
+    - name: Copy all the libs "{{ micro_integrator_home }}/lib"
       copy:
        src: "{{ product_package_location }}/lib"
        dest: "{{ micro_integrator_home }}"
