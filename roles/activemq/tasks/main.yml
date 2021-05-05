@@ -43,7 +43,7 @@
 
     - name: Example how to set default value if the variable is not defined
       debug:
-        msg: "'{{ lookup('env', 'ACTIVEMQ_HOST') | default('{{ ansible_host }}', True) }}' is the user."
+        msg: "'{{ lookup('env', 'ACTIVEMQ_HOST') | default('ansible_host', True) }}' is the user."
       -
     #- name: Create base directory
     #  file:
