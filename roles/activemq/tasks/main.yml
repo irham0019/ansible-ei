@@ -37,6 +37,14 @@
       environment:
         ACTIVEMQ_HOST: "{{ ansible_host }}"
 
+    - name: Echo $ACTIVEMQ_HOST
+      debug:
+        msg: "'{{ lookup('env', 'ACTIVEMQ_HOST') }}' is the ACTIVEMQ_HOST environment variable."
+
+    - name: Example how to set default value if the variable is not defined
+      debug:
+        msg: "'{{ lookup('env', 'ACTIVEMQ_HOST') | default('{{ ansible_host }}', True) }}' is the user."
+      -
     #- name: Create base directory
     #  file:
     #    path:  "{{ amq_base_dir }}"
