@@ -24,7 +24,9 @@ jdbc_driver: mysql-connector-java-8.0.22.jar
 oracle_jdbc_driver: ojdbc7.jar
 
 run_db_query_node: ei_2
-
+wso2ei_log_pattern: [%d] %5p {%c}
+wso2ei_log_pattern1: [%d] %5p {%c{1}}
+  
 wso2ei_log_size: 100MB
 wso2ei_log_max_files: 20
 
