@@ -25,6 +25,8 @@ oracle_jdbc_driver: ojdbc7.jar
 
 run_db_query_node: ei_1
 
+wso2ei_log_size: 100MB
+wso2ei_log_max_files: 20
 # Performance tuning configurations
 enable_performance_tuning: false
 performance_tuning_file_list:
