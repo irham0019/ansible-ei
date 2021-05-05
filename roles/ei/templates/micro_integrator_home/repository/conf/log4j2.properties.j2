@@ -60,9 +60,9 @@ appender.CARBON_LOGFILE.policies.time.type = TimeBasedTriggeringPolicy
 appender.CARBON_LOGFILE.policies.time.interval = 1
 appender.CARBON_LOGFILE.policies.time.modulate = false
 appender.CARBON_LOGFILE.policies.size.type = SizeBasedTriggeringPolicy
-appender.CARBON_LOGFILE.policies.size.size={{ wso2ei_log_size }}
+appender.CARBON_LOGFILE.policies.size.size= "{{ wso2ei_log_size }}"
 appender.CARBON_LOGFILE.strategy.type = DefaultRolloverStrategy
-appender.CARBON_LOGFILE.strategy.max = {{ wso2ei_log_max_files }}
+appender.CARBON_LOGFILE.strategy.max = "{{ wso2ei_log_max_files }}"
 appender.CARBON_LOGFILE.filter.threshold.type = ThresholdFilter
 appender.CARBON_LOGFILE.filter.threshold.level = DEBUG
 

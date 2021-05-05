@@ -123,11 +123,14 @@ truststore_password: wso2carbon
 ei_cluster: false
 
 # List of configuration file templates, and the paths they should be written to
+# List of configuration file templates, and the paths they should be written to
 config_files:
   - { src: 'micro_integrator_home/repository/conf/deployment.toml.j2',
       dest: '{{ micro_integrator_home }}/conf/deployment.toml' }
   - { src: 'micro_integrator_home/bin/micro-integrator.sh.j2',
       dest: '{{ micro_integrator_home }}/bin/micro-integrator.sh' }
+  - { src: 'micro_integrator_home/repository/conf/log4j2.properties.j2',
+      dest: '{{ micro_integrator_home }}/conf/log4j2.properties' }
 
 dashboard_config_files:
   - { src: 'micro_integrator_dashboard_home/repository/conf/deployment.yaml.j2',
