@@ -32,6 +32,11 @@
       user: name="{{ amq_user }}" shell=/bin/bash group="{{ amq_group }}" state=present uid=803
       ignore_errors: True
 
+    - name: Echo my_env_var
+      shell: "echo $ACTIVEMQ_HOST"
+      environment:
+        ACTIVEMQ_HOST: "{{ ansible_host }}"
+
     #- name: Create base directory
     #  file:
     #    path:  "{{ amq_base_dir }}"
