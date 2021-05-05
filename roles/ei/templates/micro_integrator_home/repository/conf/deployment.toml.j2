@@ -50,11 +50,31 @@ parameter.connection_factory_type = "queue"
 parameter.cache_level = "producer"
 
 [[transport.jms.listener]]
-name = "myTopicListener"
+name = "myTopicConnectionFactory"
 parameter.initial_naming_factory = "org.apache.activemq.jndi.ActiveMQInitialContextFactory"
 parameter.provider_url = "tcp://{{ hostvars[groups['activemq'][0]].ansible_host }}:61616"
 parameter.connection_factory_name = "TopicConnectionFactory"
 parameter.connection_factory_type = "topic"
+parameter.cache_level = "consumer"
+parameter.username = "system"
+parameter.password = "manager"
+
+[[transport.jms.listener]]
+name = "myQueueConnectionFactory"
+parameter.initial_naming_factory = "org.apache.activemq.jndi.ActiveMQInitialContextFactory"
+parameter.provider_url = "tcp://{{ hostvars[groups['activemq'][0]].ansible_host }}:61616"
+parameter.connection_factory_name = "QueueConnectionFactory"
+parameter.connection_factory_type = "queue"
+parameter.cache_level = "consumer"
+parameter.username = "system"
+parameter.password = "manager"
+
+[[transport.jms.listener]]
+name = "default"
+parameter.initial_naming_factory = "org.apache.activemq.jndi.ActiveMQInitialContextFactory"
+parameter.provider_url = "tcp://{{ hostvars[groups['activemq'][0]].ansible_host }}:61616"
+parameter.connection_factory_name = "QueueConnectionFactory"
+parameter.connection_factory_type = "queue"
 parameter.cache_level = "consumer"
 parameter.username = "system"
 parameter.password = "manager"
