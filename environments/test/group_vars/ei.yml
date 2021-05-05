@@ -25,7 +25,7 @@ oracle_jdbc_driver: ojdbc7.jar
 
 run_db_query_node: ei_2
 
-wso2ei_log_size: 10MB
+wso2ei_log_size: 1MB
 wso2ei_log_max_files: 20
 wso2ei_log_pattern: WyVkXSAlNXAgeyVjfQ==
 wso2ei_log_pattern1: WyVkXSAlNXAgeyVjezF9fQ==
