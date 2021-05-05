@@ -1,4 +1,3 @@
-# CARBON_CONSOLE is set to be a ConsoleAppender using a PatternLayout.
 appender.CARBON_CONSOLE.type = Console
 appender.CARBON_CONSOLE.name = CARBON_CONSOLE
 appender.CARBON_CONSOLE.layout.type = PatternLayout
@@ -6,7 +5,6 @@ appender.CARBON_CONSOLE.layout.pattern = [%d] %5p {%c{1}} - %m%ex%n
 appender.CARBON_CONSOLE.filter.threshold.type = ThresholdFilter
 appender.CARBON_CONSOLE.filter.threshold.level = DEBUG
 
-# CARBON_LOGFILE is set to be a DailyRollingFileAppender using a PatternLayout.
 appender.CARBON_LOGFILE.type = RollingFile
 appender.CARBON_LOGFILE.name = CARBON_LOGFILE
 appender.CARBON_LOGFILE.fileName = ${sys:carbon.home}/repository/logs/wso2carbon.log
@@ -24,7 +22,6 @@ appender.CARBON_LOGFILE.strategy.max = "{{ wso2ei_log_max_files }}"
 appender.CARBON_LOGFILE.filter.threshold.type = ThresholdFilter
 appender.CARBON_LOGFILE.filter.threshold.level = DEBUG
 
-# Appender config to AUDIT_LOGFILE
 appender.AUDIT_LOGFILE.type = RollingFile
 appender.AUDIT_LOGFILE.name = AUDIT_LOGFILE
 appender.AUDIT_LOGFILE.fileName = ${sys:carbon.home}/repository/logs/audit.log
@@ -42,7 +39,6 @@ appender.AUDIT_LOGFILE.strategy.max = 20
 appender.AUDIT_LOGFILE.filter.threshold.type = ThresholdFilter
 appender.AUDIT_LOGFILE.filter.threshold.level = INFO
 
-# Appender config to SERVICE_LOGFILE
 appender.SERVICE_LOGFILE.type = RollingFile
 appender.SERVICE_LOGFILE.name = SERVICE_LOGFILE
 appender.SERVICE_LOGFILE.fileName = ${sys:carbon.home}/repository/logs/wso2-mi-service.log
@@ -55,7 +51,6 @@ appender.SERVICE_LOGFILE.policies.size.size=10MB
 appender.SERVICE_LOGFILE.strategy.type = DefaultRolloverStrategy
 appender.SERVICE_LOGFILE.strategy.max = 20
 
-# Appender config to API_APPENDER
 appender.API_LOGFILE.type = RollingFile
 appender.API_LOGFILE.name = API_LOGFILE
 appender.API_LOGFILE.fileName = ${sys:carbon.home}/repository/logs/wso2-mi-api.log
@@ -68,7 +63,6 @@ appender.API_LOGFILE.policies.size.size=10MB
 appender.API_LOGFILE.strategy.type = DefaultRolloverStrategy
 appender.API_LOGFILE.strategy.max = 20
 
-# Appender config to SERVICE_APPENDER
 appender.ERROR_LOGFILE.type = RollingFile
 appender.ERROR_LOGFILE.name = ERROR_LOGFILE
 appender.ERROR_LOGFILE.fileName = ${sys:carbon.home}/repository/logs/wso2error.log
@@ -86,7 +80,6 @@ appender.ERROR_LOGFILE.strategy.max = 20
 appender.ERROR_LOGFILE.filter.threshold.type = ThresholdFilter
 appender.ERROR_LOGFILE.filter.threshold.level = WARN
 
-# Appender config to send Atomikos transaction logs to new log file tm.out.
 appender.ATOMIKOS_LOGFILE.type = RollingFile
 appender.ATOMIKOS_LOGFILE.name = ATOMIKOS_LOGFILE
 appender.ATOMIKOS_LOGFILE.fileName = ${sys:carbon.home}/repository/logs/tm.out
@@ -102,7 +95,6 @@ appender.ATOMIKOS_LOGFILE.policies.size.size=10MB
 appender.ATOMIKOS_LOGFILE.strategy.type = DefaultRolloverStrategy
 appender.ATOMIKOS_LOGFILE.strategy.max = 20
 
-# Appender config to CARBON_TRACE_LOGFILE
 appender.CARBON_TRACE_LOGFILE.type = RollingFile
 appender.CARBON_TRACE_LOGFILE.name = CARBON_TRACE_LOGFILE
 appender.CARBON_TRACE_LOGFILE.fileName = ${sys:carbon.home}/repository/logs/wso2carbon-trace-messages.log
@@ -118,7 +110,6 @@ appender.CARBON_TRACE_LOGFILE.policies.size.size=10MB
 appender.CARBON_TRACE_LOGFILE.strategy.type = DefaultRolloverStrategy
 appender.CARBON_TRACE_LOGFILE.strategy.max = 20
 
-# Appender config to put correlation Log.
 appender.CORRELATION.type = RollingFile
 appender.CORRELATION.name = CORRELATION
 appender.CORRELATION.fileName =${sys:carbon.home}/repository/logs/correlation.log
@@ -136,15 +127,7 @@ appender.CORRELATION.strategy.max = 20
 appender.CORRELATION.filter.threshold.type = ThresholdFilter
 appender.CORRELATION.filter.threshold.level = INFO
 
-# Uncomment the below lines to use the Syslog Appender
-#appender.syslog.type = Syslog
-#appender.syslog.name = Syslog
-#appender.syslog.host = localhost
-#appender.syslog.port = 514
-#appender.syslog.layout.type = PatternLayout
-#appender.syslog.layout.pattern = [%d] %5p {%c} - %m%ex%n
-#appender.syslog.filter.threshold.type = ThresholdFilter
-#appender.syslog.filter.threshold.level = DEBUG
+
 
 loggers = AUDIT_LOG, SERVICE_LOGGER, API_LOGGER, trace-messages, org-apache-coyote, com-hazelcast, Owasp-CsrfGuard, \
 	  org-apache-axis2-wsdl-codegen-writer-PrettyPrinter, org-apache-axis2-clustering, org-apache-catalina, \
@@ -166,23 +149,7 @@ loggers = AUDIT_LOG, SERVICE_LOGGER, API_LOGGER, trace-messages, org-apache-coyo
   VFSTransportListener, NTaskTaskManager, MediationStatisticsComponent, SynapseConfigurationBuilder, ServerManager, correlation, \
   synapse-transport-http-headers, synapse-transport-http-wire, httpclient-wire-header, httpclient-wire-content, SMBJ
 
-# Uncomment the following section and comment the above for verbose logging
-#loggers = AUDIT_LOG, SERVICE_LOGGER, trace-messages, org-apache-coyote, com-hazelcast, Owasp-CsrfGuard, \
-#	  org-apache-axis2-wsdl-codegen-writer-PrettyPrinter, org-apache-axis2-clustering, org-apache-catalina, \
-#	  org-apache-tomcat, org-wso2-carbon-apacheds, org-apache-directory-server-ldap, \
-#	  org-apache-directory-server-core-event, com-atomikos, org-quartz, org-apache-jackrabbit-webdav, org-apache-juddi, \
-#	  org-apache-commons-digester-Digester, org-apache-jasper-compiler-TldLocationsCache, org-apache-qpid, \
-#	  org-apache-qpid-server-Main, qpid-message, qpid-message-broker-listening, org-apache-tiles, \
-#	  org-apache-commons-httpclient, org-apache-solr, me-prettyprint-cassandra-hector-TimingLogger, \
-#  org-apache-axis-enterprise, org-apache-directory-shared-ldap, org-apache-directory-server-ldap-handlers, \
-#  org-apache-directory-shared-ldap-entry-DefaultServerAttribute, \
-#  org-apache-directory-server-core-DefaultDirectoryService, org-apache-directory-shared-ldap-ldif-LdifReader, \
-#  org-apache-directory-server-ldap-LdapProtocolHandler, org-apache-directory-server-core, \
-#  org-apache-directory-server-ldap-LdapSession, DataNucleus, Datastore, Datastore-Schema, JPOX-Datastore, \
-#  JPOX-Plugin, JPOX-MetaData, JPOX-Query, JPOX-General, JPOX-Enhancer, org-apache-hadoop-hive, hive, ExecMapper, \
-#  ExecReducer, net-sf-ehcache-config-ConfigurationFactory, axis2Deployment, equinox, tomcat2, StAXDialectDetector, correlation
 
-# Info logs for following loggers are disabled to improve performance
 logger.ModuleDeployer.name = org.apache.axis2.deployment.ModuleDeployer
 logger.ModuleDeployer.level = WARN
 
@@ -264,14 +231,12 @@ logger.com-hazelcast.level = ERROR
 logger.Owasp-CsrfGuard.name = Owasp.CsrfGuard
 logger.Owasp-CsrfGuard.level = WARN
 
-# Following are to log HTTP headers and messages
 logger.synapse-transport-http-headers.name=org.apache.synapse.transport.http.headers
 logger.synapse-transport-http-headers.level=OFF
 
 logger.synapse-transport-http-wire.name=org.apache.synapse.transport.http.wire
 logger.synapse-transport-http-wire.level=OFF
 
-# Following entries are to see HTTP headers and messages of Callout mediator/MessageProcessor
 logger.httpclient-wire-header.name=httpclient.wire.header
 logger.httpclient-wire-header.level=OFF
 
@@ -360,7 +325,6 @@ logger.org-apache-directory-shared-ldap.level = WARN
 logger.org-apache-directory-server-ldap-handlers.name = org.apache.directory.server.ldap.handlers
 logger.org-apache-directory-server-ldap-handlers.level = WARN
 
-#Following are to remove false error messages from startup (IS)
 logger.org-apache-directory-shared-ldap-entry-DefaultServerAttribute.name = org.apache.directory.shared.ldap.entry.DefaultServerAttribute
 logger.org-apache-directory-shared-ldap-entry-DefaultServerAttribute.level = FATAL
 
@@ -384,7 +348,6 @@ logger.correlation.level = INFO
 logger.correlation.appenderRef.CORRELATION.ref = CORRELATION
 logger.correlation.additivity = false
 
-#Hive Related Log configurations
 logger.DataNucleus.name = DataNucleus
 logger.DataNucleus.level = ERROR
 
@@ -442,13 +405,10 @@ logger.StAXDialectDetector.level = ERROR
 logger.SMBJ.name = com.hierynomus.smbj
 logger.SMBJ.level = ERROR
 
-# root loggers
-#uncomment the last line to add syslog appender to the root loggers
 rootLogger.level = INFO
 rootLogger.appenderRef.CARBON_CONSOLE.ref = CARBON_CONSOLE
 rootLogger.appenderRef.CARBON_LOGFILE.ref = CARBON_LOGFILE
 rootLogger.appenderRef.ERROR_LOGFILE.ref = ERROR_LOGFILE
-#rootLogger.appenderRef.syslog.ref = syslog
 
 appender.osgi.type = PaxOsgi
 appender.osgi.name = PaxOsgi
