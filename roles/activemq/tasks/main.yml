@@ -20,6 +20,10 @@
     #    uid:   "{{ amq_uid | default(omit) }}"
     #  when: amq_create_user == True
 
+    - name: "Ansible | Print a variable"
+      debug:
+        msg: "The operating system ei --- cluster {{ amq_datasource }}"
+
     - name: Create ActiveMQ group
       group: name="{{ amq_group }}" state=present gid=803
       ignore_errors: True
@@ -169,7 +173,7 @@
       with_items:
       - activemq.xml.j2
 #      - jetty-realm.properties.j2
-#      - jetty.xml.j2
+      - jetty.xml.j2
 #      - login.config.j2
 #      notify: "restart activemq"
       tags:
