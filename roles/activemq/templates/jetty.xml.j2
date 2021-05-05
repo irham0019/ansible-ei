@@ -48,11 +48,7 @@
     </bean>
     <bean id="securityConstraintMapping" class="org.eclipse.jetty.security.ConstraintMapping">
         <property name="constraint" ref="securityConstraint" />
-{% if amq_hawtio_enabled and amq_hawtio_replace_default_console %}
-        <property name="pathSpec" value="/api/*,*.jsp" />
-{% else %}
-        <property name="pathSpec" value="/api/*,/admin/*,*.jsp" />
-{% endif %}
+        <property name="pathSpec" value="/*,/api/*,/admin/*,*.jsp" />
     </bean>
     <bean id="adminSecurityConstraintMapping" class="org.eclipse.jetty.security.ConstraintMapping">
         <property name="constraint" ref="adminSecurityConstraint" />
