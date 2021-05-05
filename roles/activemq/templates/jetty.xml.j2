@@ -81,13 +81,6 @@
 					<property name="resourceBase" value="${activemq.home}/webapps/api" />
 					<property name="logUrlOnStart" value="true" />
 				</bean>
-{% if amq_hawtio_enabled and not amq_hawtio_replace_default_console %}
-				<bean class="org.eclipse.jetty.webapp.WebAppContext">
-				    <property name="contextPath" value="/hawtio" />
-				    <property name="resourceBase" value="${activemq.home}/webapps/hawtio" />
-				    <property name="logUrlOnStart" value="true" />
-				</bean>
-{% endif %}
 				<bean class="org.eclipse.jetty.server.handler.ResourceHandler">
 					<property name="directoriesListed" value="false" />
 					<property name="welcomeFiles">
