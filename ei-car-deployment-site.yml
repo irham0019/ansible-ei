@@ -13,27 +13,13 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #----------------------------------------------------------------------------
+
 ---
-  - block:
-    # Set installation directory information
+# This playbook deploys the whole application stack in this site.
 
-      - name: Stop wso2ei as a service
-        systemd:
-          name: wso2ei
-          state: stopped
-        ignore_errors: yes
+- name: Apply common configuration to all nodes
+  hosts: all
+  roles:
+    - restart
 
-      - name: sleep for 15 seconds and continue with play
-        wait_for:
-          timeout: 15
 
-      - name: Start wso2-ei as a service
-        systemd:
-          name: wso2ei
-          state: started
-          daemon_reload: yes
-
-    become: true
-    become_user: root
-    when: "(inventory_hostname in groups['ei'])"
-    become_method: sudo
