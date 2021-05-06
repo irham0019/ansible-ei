@@ -29,6 +29,11 @@
   roles:
     - ei
 
+- name: Copy car files to all ei nodes
+  hosts: all
+  roles:
+    - capp-deployment
+
 - name: Apply EI configuration to is nodes
   hosts:
     - activemq_1

@@ -17,7 +17,7 @@
 ---
 # This playbook deploys the whole application stack in this site.
 
-- name: Apply common configuration to all nodes
+- name: Copy car files to all ei nodes
   hosts: all
   roles:
     - capp-deployment
