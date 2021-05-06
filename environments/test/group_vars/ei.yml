@@ -80,8 +80,8 @@ java_home: "{{ java_dir }}/{{ jdk_name }}"
 
 # Data source configurations for the shared database which hosts registry and user management tables
 wso2ei_db_type: mysql
-wso2ei_db_name: WSO2SQLDEV01
-wso2ei_db_host: 10.0.1.223
+wso2ei_db_name: WSO2SQLQA01
+wso2ei_db_host: 10.0.1.42
 wso2ei_db_port: 3306
 
 wso2ei_db_url: jdbc:mysql://{{wso2ei_db_host}}:{{wso2ei_db_port}}/{{wso2ei_db_name}}?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;autoReconnect=true&amp;requireSSL=false&amp;verifyServerCertificate=false&amp;serverTimezone=UTC
