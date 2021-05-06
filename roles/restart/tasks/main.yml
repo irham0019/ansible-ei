@@ -21,15 +21,21 @@
           product_dir: "{{ target }}/is"
           carbon_home: "{{ target }}/is/{{ product_name }}-{{ product_version }}"
 
-      - name: Stop wso2is as a service
+      - name: Stop wso2ei as a service
         systemd:
-          name: wso2is
+          name: wso2ei
           state: stopped
         ignore_errors: yes
 
-      - name: sleep for 30 seconds and continue with play
+      - name: sleep for 15 seconds and continue with play
         wait_for:
-          timeout: 30
+          timeout: 15
+
+      - name: Start wso2-ei as a service
+        systemd:
+          name: wso2ei
+          state: started
+          daemon_reload: yes
 
 #      - name: Copy WSO2IS service file
 #        template:
@@ -51,5 +57,5 @@
 
     become: true
     become_user: root
-    when: "(inventory_hostname in groups['is'])"
+    when: "(inventory_hostname in groups['ei'])"
     become_method: sudo
