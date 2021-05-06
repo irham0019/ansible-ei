@@ -34,6 +34,15 @@
           src: "{{ product_package_location }}/carbonapps"
           dest: "{{ micro_integrator_home }}/repository/deployment/server"
 
+      - name: "Change the owner of {{ carbon_home }} directory"
+        file:
+          path: "{{ carbon_home }}"
+          state: directory
+          recurse: true
+          owner: "{{ wso2_user }}"
+          group: "{{ wso2_group }}"
+          mode: 0755
+
     become: true
     become_user: root
     when: "(inventory_hostname in groups['ei'])"
