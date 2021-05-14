@@ -22,3 +22,4 @@ hostname: 34.121.29.75
 port_offset: 0
 
 wso2ei_dashboard_enable: True
+#environment: local

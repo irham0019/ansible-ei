@@ -30,7 +30,7 @@ wso2ei_log_pattern1: WyVkXSAlNXAgeyVjezF9fQ==
 wso2ei_log_size: 100MB
 wso2ei_log_max_files: 20
 
-environment: dev
+env: dev
 
 # Performance tuning configurations
 enable_performance_tuning: false
