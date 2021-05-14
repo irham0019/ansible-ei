@@ -24,19 +24,14 @@
           micro_integrator_dashboard_home: "{{ target }}/ei/{{ product_name }}-{{ product_version }}/micro-integrator-dashboard"
           cluster: "{{ ei_cluster }}"
 
-      - name: Copy Carbonapp StullerSharedResources
-        copy:
-          src: "{{ product_package_location }}/carbonapps/init-carbonapp/StullerSharedResources-car_1.0.0.car"
-          dest: "{{ micro_integrator_home }}/repository/deployment/server/carbonapps/StullerSharedResources-car_1.0.0.car"
-
-      - name: sleep for 15 seconds and continue with play
-        wait_for:
-          timeout: 15
-
       - name: Copy Carbonapps Driver
         copy:
-          src: "{{ product_package_location }}/carbonapps/{{ environment }}/carbonapps"
+          src: "{{ product_package_location }}/carbonapps/{{ environment }}/hot-deployment/carbonapps"
           dest: "{{ micro_integrator_home }}/repository/deployment/server"
+
+      - name: sleep for 25 seconds and continue with play
+        wait_for:
+          timeout: 25
 
       - name: "Change the owner of {{ carbon_home }} directory"
         file:

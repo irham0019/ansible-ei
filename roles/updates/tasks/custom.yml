@@ -14,14 +14,4 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
----
-# This playbook deploys the whole application stack in this site.
-
-- name: Copy car files to all ei nodes
-  hosts:
-    - ei_1
-    - ei_2
-  roles:
-    - capp-deployment
-
-
+# Add configs for the custom files that are needed to be copied/replaced to all the nodes here.

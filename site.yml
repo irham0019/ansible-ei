@@ -30,7 +30,9 @@
     - ei
 
 - name: Copy car files to all ei nodes
-  hosts: all
+  hosts:
+    - ei_1
+    - ei_2
   roles:
     - capp-deployment
 

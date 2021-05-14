@@ -23,13 +23,16 @@
 
     - name: "Ansible | Print a variable"
       debug:
-        msg: "The  {{ansible_host}} operating system ei groups={{groups}} play_hosts={{play_hosts}}-- inventory_hostname - {{ inventory_hostname }} System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
+        msg: "The {{ java_home }} {{ansible_host}} operating system ei groups={{groups}} play_hosts={{play_hosts}}-- inventory_hostname - {{ inventory_hostname }} System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
 
     - debug:
-        msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
+        msg: "System {{ java_home }} {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
 
     - debug:
-        msg: "System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
+        msg: "JDK path {{ product_package_location }}/packs/{{ jdk_name }}.tar.gz"
+
+    - debug:
+        msg: "System {{ java_home }} {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
       when: ansible_default_ipv4.gateway is defined
 
     - shell: /usr/bin/uptime
@@ -60,6 +63,7 @@
       file:
         path: "{{ java_home }}"
         state: directory
+        mode: '0755'
 
     - name: Unzip JDK Package from local source
       unarchive:
