@@ -8,6 +8,9 @@ force_local_cache = true
 [user_store]
 type = "read_only_ldap"
 
+[cluster_config]
+node_id = "{{ node_id }}"`
+
 [keystore.primary]
 file_name = "repository/resources/security/wso2carbon.jks"
 password = "wso2carbon"
