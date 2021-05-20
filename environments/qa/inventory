@@ -1,5 +1,5 @@
 [ei]
-ei_1 ansible_host=wso2eidev01.stuller.laf ansible_user=root ansible_password=H@cKeYS@cK1!
-ei_2 ansible_host=wso2eidev02.stuller.laf ansible_user=root ansible_password=H@cKeYS@cK1!
+ei_1 ansible_host=wso2eiqa01.stuller.laf ansible_user=root ansible_password=H@cKeYS@cK1!
+ei_2 ansible_host=wso2eiqa02.stuller.laf ansible_user=root ansible_password=H@cKeYS@cK1!
 [activemq]
-activemq_1 ansible_host=wso2mqdev01.stuller.laf ansible_user=root ansible_password=H@cKeYS@cK1!
+activemq_1 ansible_host=wso2mqqa01.stuller.laf ansible_user=root ansible_password=H@cKeYS@cK1!
