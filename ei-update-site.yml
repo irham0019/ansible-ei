@@ -20,6 +20,6 @@
 - name: Apply common configuration to all nodes
   hosts: ei
   roles:
-    - restart
+    - updates
 
 
