@@ -43,13 +43,13 @@
       delay: 3
 
     - name: Waiting for stack to Deploy...
+      become: true
+      become_user: '{{ wso2_user }}'
       shell: '{{ micro_integrator_dashboard_home }}/bin/wso2update_linux --username {{ sub_username }} --password {{ sub_password }}'
       register: waiting_for_stack
       until: waiting_for_stack.stdout.find("updated successfully") or waiting_for_stack.stdout.find("is the latest update level available for the product")!= -1
       retries: 10
       delay: 3
-      sudo: yes
-      sudo_user: "{{ wso2_user }}"
 
     - debug: var=waiting_for_stack.stdout_lines
 
