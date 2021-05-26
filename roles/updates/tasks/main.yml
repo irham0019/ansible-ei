@@ -48,6 +48,8 @@
       until: waiting_for_stack.stdout.find("updated successfully") or waiting_for_stack.stdout.find("is the latest update level available for the product")!= -1
       retries: 10
       delay: 3
+      sudo: yes
+      sudo_user: "{{ wso2_user }}"
 
     - debug: var=waiting_for_stack.stdout_lines
 
@@ -62,6 +64,6 @@
         daemon_reload: yes
 
     become: true
-    become_user: wso2carbon
+    become_user: root
     when: "(inventory_hostname in groups['ei'])"
     become_method: sudo
