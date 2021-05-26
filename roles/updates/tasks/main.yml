@@ -62,6 +62,6 @@
         daemon_reload: yes
 
     become: true
-    become_user: root
+    become_user: wso2carbon
     when: "(inventory_hostname in groups['ei'])"
     become_method: sudo
