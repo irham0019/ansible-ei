@@ -35,6 +35,15 @@
         state: stopped
       ignore_errors: yes
 
+    - name: Change the owner of WSO2 directory
+      file:
+        path: "{{ target }}"
+        state: directory
+        recurse: true
+        owner: "{{ wso2_user }}"
+        group: "{{ wso2_group }}"
+        mode: 0755
+
     - name: Waiting for stack to Deploy...
       shell: '{{ micro_integrator_home }}/bin/wso2update_linux --username {{ sub_username }} --password {{ sub_password }}'
       register: waiting_for_stack
