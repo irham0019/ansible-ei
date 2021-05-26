@@ -31,6 +31,7 @@ wso2ei_log_size: 100MB
 wso2ei_log_max_files: 20
 
 env: prod
+nodes: node-1,node-2
 # Performance tuning configurations
 enable_performance_tuning: false
 performance_tuning_file_list:

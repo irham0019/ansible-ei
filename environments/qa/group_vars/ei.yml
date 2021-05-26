@@ -31,6 +31,7 @@ wso2ei_log_pattern: WyVkXSAlNXAgeyVjfQ==
 wso2ei_log_pattern1: WyVkXSAlNXAgeyVjezF9fQ==
 
 env: qa
+nodes: node-1,node-2
 # Performance tuning configurations
 enable_performance_tuning: false
 performance_tuning_file_list:

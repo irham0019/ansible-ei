@@ -82,8 +82,14 @@ parameter.cache_level = "consumer"
 parameter.username = "system"
 parameter.password = "manager"
 
+#[task_handling]
+#resolver_class = "org.wso2.micro.integrator.ntask.coordination.task.resolver.RoundRobinResolver"
+
+#[[task_resolver]]
+#task_server_count = "2"
+
 [task_handling]
-resolver_class = "org.wso2.micro.integrator.ntask.coordination.task.resolver.RoundRobinResolver"
+resolver_class = "org.wso2.micro.integrator.ntask.coordination.task.resolver.TaskNodeResolver"
 
 [[task_resolver]]
-task_server_count = "2"
+task_nodes = "{{ nodes }}"
