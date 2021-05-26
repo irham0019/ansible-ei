@@ -36,8 +36,9 @@
 
     <!--
         The <broker> element is used to configure the ActiveMQ broker.
+        <broker xmlns="http://activemq.apache.org/schema/core" brokerName="{{ hostvars[groups['activemq'][0]].ansible_host }}" dataDirectory="${activemq.data}">
     -->
-    <broker xmlns="http://activemq.apache.org/schema/core" brokerName="{{ hostvars[groups['activemq'][0]].ansible_host }}" dataDirectory="${activemq.data}">
+    <broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" dataDirectory="${activemq.data}">
 
         <destinationPolicy>
             <policyMap>
