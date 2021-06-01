@@ -28,6 +28,7 @@
         copy:
           src: "{{ product_package_location }}/carbonapps/{{ environment }}/hot-deployment/carbonapps"
           dest: "{{ micro_integrator_home }}/repository/deployment/server"
+        when: carbon_apps_deployment == True
 
       - name: sleep for 25 seconds and continue with play
         wait_for:
