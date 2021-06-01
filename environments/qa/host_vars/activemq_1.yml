@@ -14,10 +14,10 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 ---
-vault_amq_database: AMQSQLDEV01
+vault_amq_database: AMQSQLQA01
 vault_amq_username: wso2mquser
 vault_amq_password: Orac!e@123
-vault_amq_hostname: 10.0.1.223
+vault_amq_hostname: 10.0.1.42
 
 vault_amq_keystore_password: password
 

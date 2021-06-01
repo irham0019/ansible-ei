@@ -26,7 +26,7 @@
 
       - name: Copy Carbonapps Driver
         copy:
-          src: "{{ product_package_location }}/carbonapps/{{ environment }}/hot-deployment/carbonapps"
+          src: "{{ product_package_location }}/carbonapps/{{ env }}/hot-deployment/carbonapps"
           dest: "{{ micro_integrator_home }}/repository/deployment/server"
 
       - name: sleep for 25 seconds and continue with play
