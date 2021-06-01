@@ -24,3 +24,5 @@ port_offset: 0
 wso2ei_dashboard_enable: True
 node_id: node-1
 #environment: local
+
+carbon_apps_deployment: True
