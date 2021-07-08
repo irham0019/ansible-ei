@@ -1,6 +1,5 @@
 [ei]
-ei_1 ansible_host=34.121.29.75 ansible_user=irham_integration ansible_ssh_private_key_file=~/.ssh/id_rsa
-ei_2 ansible_host=35.202.118.190 ansible_user=irham_integration ansible_ssh_private_key_file=~/.ssh/id_rsa
-
+ei_1 ansible_host=wso2eiprod01.stuller.laf ansible_user=root
+ei_2 ansible_host=wso2eiprod02.stuller.laf ansible_user=root
 [activemq]
-activemq_1 ansible_host=35.184.193.49 ansible_user=irham_integration ansible_ssh_private_key_file=~/.ssh/id_rsa
+activemq_1 ansible_host=wso2mqprod01.stuller.laf ansible_user=root

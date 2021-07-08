@@ -33,6 +33,8 @@ wso2ei_log_max_files: 20
 env: dev
 nodes: node-1,node-2
 
+enableEmail: False
+
 sub_username: !vault |
   $ANSIBLE_VAULT;1.1;AES256
   62343461633833383463663062386566653538383663333863656433663562393266336165313932

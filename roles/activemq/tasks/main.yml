@@ -178,7 +178,7 @@
         mode:  0640
       with_items:
       - activemq.xml.j2
-#      - jetty-realm.properties.j2
+      - jetty-realm.properties.j2
 #      - jetty.xml.j2
 #      - login.config.j2
 #      notify: "restart activemq"

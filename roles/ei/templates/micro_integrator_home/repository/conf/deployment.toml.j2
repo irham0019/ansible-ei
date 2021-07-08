@@ -93,3 +93,16 @@ resolver_class = "org.wso2.micro.integrator.ntask.coordination.task.resolver.Tas
 
 [[task_resolver]]
 task_nodes = "{{ nodes }}"
+
+{% if enableEmail %}
+[[transport.mail.sender]]
+name = "mailto"
+parameter.hostname = "owa.stuller.com"
+parameter.port = "25"
+parameter.enable_tls = true
+parameter.auth = false
+parameter.username = "wso2admin"
+parameter.password = ""
+parameter.from = "WSO2_Admin@stuller.com"
+{% endif %}
+

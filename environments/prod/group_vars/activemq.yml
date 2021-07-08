@@ -24,11 +24,11 @@ target: /mnt
 product_package_location: files
 jdbc_driver: mysql-connector-java-8.0.22.jar
 amq_version: 5.14.5
-amq_skip_download: True
+amq_skip_download: False
 ansible_service_mgr: systemd
 pack_location: local
 
-amq_web_user_roles: user,admin
+amq_web_user_roles: user1,user,admin
 amq_web_admin_roles: admin
 
 jdk_name: amazon-corretto-8.282.08.1-linux-x64
@@ -90,15 +90,3 @@ catalina_server_connector_http_accept_count: 200
 # catalina_server_connector_https_proxy_port: 443
 catalina_server_connector_https_max_threads: 250
 catalina_server_connector_https_accept_count: 200
-
-vault_amq_database: ActiveMQPersistentStore
-vault_amq_username: wso2mquser
-vault_amq_password: DNn3aJGPTYY4vSiNVK6X
-vault_amq_hostname: 10.0.1.64
-
-vault_amq_keystore_password: password
-
-vault_amq_web_users:
-  - username: admin
-    password: topsecret
-    rolename: admin
